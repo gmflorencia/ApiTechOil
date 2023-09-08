@@ -1,6 +1,7 @@
-using ApiTechOil.DataAccess;
-using ApiTechOil.Repository;
-using ApiTechOil.Services;
+using TechOilAPI.DataAccess;
+using TechOilAPI.Repository;
+using TechOilAPI.Services;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +12,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer("name=DefaultConnection");
+});
 
-builder.Services.AddDbContext<AppDbContext>
-    (options => options.UseInMemoryDatabase("UsuarioDB"));
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 var app = builder.Build();
