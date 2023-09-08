@@ -1,27 +1,23 @@
-﻿using TechOilAPI.DataAccess.DataBaseSeeding;
-using TechOilAPI.Entities;
+﻿using ApiTechOil.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace TechOilAPI.DataAccess
+namespace ApiTechOil.DataAccess
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext (DbContextOptions <AppDbContext> options) : base(options) 
+        public AppDbContext (DbContextOptions <AppDbContext> options) : base(options)
         {
+            fillUsuario();
         }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Proyectos> Proyectos { get; set; }
-        public DbSet<Servicios> Servicios { get; set; }
-        public DbSet<Trabajos> Trabajos { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
-            var seeders = new List<IEntitySeeder>
+        private void fillUsuario()
+        {
+            if (Usuarios == null)
             {
-                new EntitySeeder()
-            };
-            foreach (var seeder in seeders)
-            {
-                seeder.SeedDataBase(modelBuilder);
+                Usuarios.Add(new Usuario { CodUsuario = 1, Nombre = "Martin Cabrera", Dni = 31467581, PerfilUsuario = 1, Clave = "1234" });
+                Usuarios.Add(new Usuario { CodUsuario = 2, Nombre = "Florencia Gonzalez", Dni = 37053098, PerfilUsuario = 2, Clave = "5678" });
+                Usuarios.Add(new Usuario { CodUsuario = 3, Nombre = "Salome Cabrera", Dni = 58706438, PerfilUsuario = 1, Clave = "5792"});
+                this.SaveChanges();
             }
         }
     }

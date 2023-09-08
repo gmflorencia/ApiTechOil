@@ -1,6 +1,6 @@
-﻿using TechOilAPI.Entities;
+﻿using ApiTechOil.Entities;
 
-namespace TechOilAPI.Repository
+namespace ApiTechOil.Repository
 {
     public interface IUsuarioRepository{
          IEnumerable<Usuario>GetAllUsuarios();
