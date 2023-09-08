@@ -1,8 +1,7 @@
 using ApiTechOil.DataAccess;
-using ApiTechOil.Entities;
 using ApiTechOil.Repository;
+using ApiTechOil.Services;
 using Microsoft.EntityFrameworkCore;
-using TechOilAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

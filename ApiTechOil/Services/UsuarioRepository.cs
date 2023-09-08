@@ -3,7 +3,7 @@ using ApiTechOil.DataAccess;
 using ApiTechOil.Repository;
 using ApiTechOil.Entities;
 
-namespace TechOilAPI.Services
+namespace ApiTechOil.Services
 {
     public class UsuarioRepository : IUsuarioRepository
     {
