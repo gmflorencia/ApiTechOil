@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TechOilAPI.DataAccess.DataBaseSeeding
+namespace ApiTechOil.DataAccess.DataBaseSeeding
 {
     public interface IEntitySeeder
     {

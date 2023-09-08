@@ -1,8 +1,8 @@
-﻿using TechOilAPI.DataAccess.DataBaseSeeding;
-using TechOilAPI.Entities;
+﻿using ApiTechOil.DataAccess.DataBaseSeeding;
+using ApiTechOil.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace TechOilAPI.DataAccess
+namespace ApiTechOil.DataAccess
 {
     public class AppDbContext : DbContext
     {

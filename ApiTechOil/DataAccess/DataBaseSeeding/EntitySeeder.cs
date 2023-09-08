@@ -1,9 +1,9 @@
-﻿using TechOilAPI.Entities;
+﻿using ApiTechOil.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
-namespace TechOilAPI.DataAccess.DataBaseSeeding
+namespace ApiTechOil.DataAccess.DataBaseSeeding
 {
     public class EntitySeeder : IEntitySeeder
     {

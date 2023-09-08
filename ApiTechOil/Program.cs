@@ -1,6 +1,6 @@
-using TechOilAPI.DataAccess;
-using TechOilAPI.Repository;
-using TechOilAPI.Services;
+using ApiTechOil.DataAccess;
+using ApiTechOil.Repository;
+using ApiTechOil.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
