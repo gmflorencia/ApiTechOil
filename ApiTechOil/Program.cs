@@ -1,5 +1,6 @@
 using ApiTechOil.DataAccess;
-using ApiTechOil.Repository;
+using ApiTechOil.DataAccess.Repositories;
+using ApiTechOil.DataAccess.Repositories.Interfaces;
 using ApiTechOil.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer("name=DefaultConnection");
 });
 
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWorkService>();
 
 var app = builder.Build();
 
