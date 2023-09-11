@@ -14,7 +14,7 @@ namespace ApiTechOil.DataAccess.Repositories
         }
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
-            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Dni == int.Parse(dto.Dni) && x.Clave == dto.Clave);
+            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Email == dto.Email && x.Clave == dto.Clave);
         }
         /* private readonly AppDbContext _dbContext;
 

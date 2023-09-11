@@ -17,7 +17,6 @@ namespace ApiTechOil.Entities
         [Required]
         [Column ("ValorHora", TypeName = "decimal")]
         public double ValorHora { get; set; }
-        
 
     }
 }

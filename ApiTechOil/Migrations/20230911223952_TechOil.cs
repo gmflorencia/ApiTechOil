@@ -21,7 +21,8 @@ namespace ApiTechOil.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "VARCHAR (100)", nullable: false),
                     Direccion = table.Column<string>(type: "VARCHAR (100)", nullable: false),
-                    Estado = table.Column<int>(type: "int", nullable: false)
+                    Estado = table.Column<int>(type: "int", nullable: false),
+                    Activo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +55,8 @@ namespace ApiTechOil.Migrations
                     CodServicio = table.Column<int>(type: "int", nullable: false),
                     CantHoras = table.Column<int>(type: "int", nullable: false),
                     ValorHora = table.Column<decimal>(type: "decimal(38,17)", nullable: false),
-                    Costo = table.Column<decimal>(type: "decimal(38,17)", nullable: false)
+                    Costo = table.Column<decimal>(type: "decimal(38,17)", nullable: false),
+                    Activo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +72,9 @@ namespace ApiTechOil.Migrations
                     Nombre = table.Column<string>(type: "VARCHAR (100)", nullable: false),
                     Dni = table.Column<int>(type: "int", nullable: false),
                     PerfilUsuario = table.Column<int>(type: "int", nullable: false),
-                    CLave = table.Column<string>(type: "VARCHAR (100)", nullable: false)
+                    Email = table.Column<string>(type: "VARCHAR (100)", nullable: false),
+                    CLave = table.Column<string>(type: "VARCHAR (100)", nullable: false),
+                    Activo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,12 +83,12 @@ namespace ApiTechOil.Migrations
 
             migrationBuilder.InsertData(
                 table: "Proyectos",
-                columns: new[] { "CodProyecto", "Direccion", "Estado", "Nombre" },
+                columns: new[] { "CodProyecto", "Activo", "Direccion", "Estado", "Nombre" },
                 values: new object[,]
                 {
-                    { 1, "Sanchez 33, Glew", 2, "Proyecto 001" },
-                    { 2, "Santa fe 342, Lomas de Zamora", 1, "Proyecto 002" },
-                    { 3, " Lavalle 1674, CABA", 2, "Proyecto 003" }
+                    { 1, true, "Sanchez 33, Glew", 2, "Proyecto 001" },
+                    { 2, true, "Santa fe 342, Lomas de Zamora", 1, "Proyecto 002" },
+                    { 3, true, " Lavalle 1674, CABA", 2, "Proyecto 003" }
                 });
 
             migrationBuilder.InsertData(
@@ -99,22 +103,22 @@ namespace ApiTechOil.Migrations
 
             migrationBuilder.InsertData(
                 table: "Trabajos",
-                columns: new[] { "CodTrabajo", "CantHoras", "CodProyecto", "CodServicio", "Costo", "Fecha", "ValorHora" },
+                columns: new[] { "CodTrabajo", "Activo", "CantHoras", "CodProyecto", "CodServicio", "Costo", "Fecha", "ValorHora" },
                 values: new object[,]
                 {
-                    { 1, 28, 1, 2, 150m, new DateTime(2023, 9, 8, 4, 3, 27, 734, DateTimeKind.Local).AddTicks(3419), 0.25m },
-                    { 2, 28, 2, 3, 180m, new DateTime(2023, 9, 8, 4, 3, 27, 734, DateTimeKind.Local).AddTicks(3431), 0.25m },
-                    { 3, 28, 3, 3, 190m, new DateTime(2023, 9, 8, 4, 3, 27, 734, DateTimeKind.Local).AddTicks(3432), 0.25m }
+                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1673), 0.25m },
+                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1697), 0.25m },
+                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1700), 0.25m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
-                columns: new[] { "CodUsuario", "CLave", "Dni", "Nombre", "PerfilUsuario" },
+                columns: new[] { "CodUsuario", "Activo", "CLave", "Dni", "Email", "Nombre", "PerfilUsuario" },
                 values: new object[,]
                 {
-                    { 1, "1234", 31467581, "Martin Cabrera", 1 },
-                    { 2, "5678", 37053098, "Florencia Gonzalez", 2 },
-                    { 3, "5792", 58706438, "Salome Cabrera", 1 }
+                    { 1, true, "1234", 31467581, "martin@gmail.com", "Martin Cabrera", 1 },
+                    { 2, true, "5678", 37053098, "florencia@gmail.com", "Florencia Gonzalez", 2 },
+                    { 3, true, "5792", 58706438, "salome@gmail.com", "Salome Cabrera", 1 }
                 });
         }
 

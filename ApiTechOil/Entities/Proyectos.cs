@@ -17,5 +17,10 @@ namespace ApiTechOil.Entities
         [Required]
         [Column ("Estado", TypeName = "int")]
         public int Estado { get; set; }
+        [Required]
+        [Column("Activo", TypeName = "bit")]
+        public bool Activo { get; set; }
+
+
     }
 }

@@ -17,9 +17,19 @@ namespace ApiTechOil.Entities
         [Required]
         [Column("PerfilUsuario", TypeName = "int")]
         public int PerfilUsuario { get; set; }
+
+        [Required]
+        [Column("Email", TypeName = "VARCHAR (100)")]
+        public string Email { get; set; }
+
         [Required]
         [Column("CLave", TypeName = "VARCHAR (100)")]
         public string Clave { get; set; }
+
+        [Required]
+        [Column ("Activo", TypeName = "bit")]
+        public bool Activo { get; set; }
+
 
     }
 }
