@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiTechOil.Entities;
 using ApiTechOil.DataAccess.Repositories.Interfaces;
 using ApiTechOil.Services;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,6 +11,7 @@ namespace ApiTechOil.Controllers
 {
     [Route("api/Usuario")]
     [ApiController]
+    [Authorize]
     public class UsuarioControllers : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;

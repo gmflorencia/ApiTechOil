@@ -2,6 +2,7 @@
 using ApiTechOil.DataAccess;
 using ApiTechOil.Entities;
 using ApiTechOil.DataAccess.Repositories.Interfaces;
+using ApiTechOil.DTOs;
 
 namespace ApiTechOil.DataAccess.Repositories
 {
@@ -10,6 +11,10 @@ namespace ApiTechOil.DataAccess.Repositories
 
         public UsuarioRepository(AppDbContext context) : base(context)
         {
+        }
+        public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
+        {
+            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Dni == int.Parse(dto.Dni) && x.Clave == dto.Clave);
         }
         /* private readonly AppDbContext _dbContext;
 
