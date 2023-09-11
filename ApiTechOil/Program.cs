@@ -4,6 +4,10 @@ using ApiTechOil.DataAccess.Repositories.Interfaces;
 using ApiTechOil.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +16,44 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Autorizacion JWT",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type= ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    }, new string[]{ }
+                    }
+                });
+
+});
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer("name=DefaultConnection");
 });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+           .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()
+           {
+               ValidateIssuerSigningKey = true,
+               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+               ValidateIssuer = false,
+               ValidateAudience = false
+           }); ;
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkService>();
 
@@ -31,6 +68,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
