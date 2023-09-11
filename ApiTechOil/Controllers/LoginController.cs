@@ -30,7 +30,7 @@ namespace ApiTechOil.Controllers
             var usuario = new UsuarioLoginDto()
             {
                 Nombre = userCredentials.Nombre,
-                Dni = userCredentials.Dni.ToString(),
+                Email = userCredentials.Email,
                 Token = token
             };
             return Ok(usuario);

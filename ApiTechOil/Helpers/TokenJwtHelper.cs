@@ -25,7 +25,7 @@ namespace ApiTechOil.Helpers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                 new Claim(ClaimTypes.NameIdentifier, usuario.CodUsuario.ToString()),
-                new Claim(ClaimTypes.Name, usuario.Dni.ToString())
+                new Claim(ClaimTypes.Email, usuario.Email)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
