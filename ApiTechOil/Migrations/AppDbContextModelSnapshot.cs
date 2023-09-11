@@ -31,6 +31,10 @@ namespace ApiTechOil.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodProyecto"));
 
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Activo");
+
                     b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("VARCHAR (100)")
@@ -53,6 +57,7 @@ namespace ApiTechOil.Migrations
                         new
                         {
                             CodProyecto = 1,
+                            Activo = true,
                             Direccion = "Sanchez 33, Glew",
                             Estado = 2,
                             Nombre = "Proyecto 001"
@@ -60,6 +65,7 @@ namespace ApiTechOil.Migrations
                         new
                         {
                             CodProyecto = 2,
+                            Activo = true,
                             Direccion = "Santa fe 342, Lomas de Zamora",
                             Estado = 1,
                             Nombre = "Proyecto 002"
@@ -67,6 +73,7 @@ namespace ApiTechOil.Migrations
                         new
                         {
                             CodProyecto = 3,
+                            Activo = true,
                             Direccion = " Lavalle 1674, CABA",
                             Estado = 2,
                             Nombre = "Proyecto 003"
@@ -132,6 +139,10 @@ namespace ApiTechOil.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodTrabajo"));
 
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Activo");
+
                     b.Property<int>("CantHoras")
                         .HasColumnType("int")
                         .HasColumnName("CantHoras");
@@ -162,31 +173,34 @@ namespace ApiTechOil.Migrations
                         new
                         {
                             CodTrabajo = 1,
+                            Activo = true,
                             CantHoras = 28,
                             CodProyecto = 1,
                             CodServicio = 2,
                             Costo = 150m,
-                            Fecha = new DateTime(2023, 9, 8, 4, 3, 27, 734, DateTimeKind.Local).AddTicks(3419),
+                            Fecha = new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1673),
                             ValorHora = 0.25m
                         },
                         new
                         {
                             CodTrabajo = 2,
+                            Activo = true,
                             CantHoras = 28,
                             CodProyecto = 2,
                             CodServicio = 3,
                             Costo = 180m,
-                            Fecha = new DateTime(2023, 9, 8, 4, 3, 27, 734, DateTimeKind.Local).AddTicks(3431),
+                            Fecha = new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1697),
                             ValorHora = 0.25m
                         },
                         new
                         {
                             CodTrabajo = 3,
+                            Activo = true,
                             CantHoras = 28,
                             CodProyecto = 3,
                             CodServicio = 3,
                             Costo = 190m,
-                            Fecha = new DateTime(2023, 9, 8, 4, 3, 27, 734, DateTimeKind.Local).AddTicks(3432),
+                            Fecha = new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1700),
                             ValorHora = 0.25m
                         });
                 });
@@ -200,6 +214,10 @@ namespace ApiTechOil.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodUsuario"));
 
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Activo");
+
                     b.Property<string>("Clave")
                         .IsRequired()
                         .HasColumnType("VARCHAR (100)")
@@ -208,6 +226,11 @@ namespace ApiTechOil.Migrations
                     b.Property<int>("Dni")
                         .HasColumnType("int")
                         .HasColumnName("Dni");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR (100)")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -226,24 +249,30 @@ namespace ApiTechOil.Migrations
                         new
                         {
                             CodUsuario = 1,
+                            Activo = true,
                             Clave = "1234",
                             Dni = 31467581,
+                            Email = "martin@gmail.com",
                             Nombre = "Martin Cabrera",
                             PerfilUsuario = 1
                         },
                         new
                         {
                             CodUsuario = 2,
+                            Activo = true,
                             Clave = "5678",
                             Dni = 37053098,
+                            Email = "florencia@gmail.com",
                             Nombre = "Florencia Gonzalez",
                             PerfilUsuario = 2
                         },
                         new
                         {
                             CodUsuario = 3,
+                            Activo = true,
                             Clave = "5792",
                             Dni = 58706438,
+                            Email = "salome@gmail.com",
                             Nombre = "Salome Cabrera",
                             PerfilUsuario = 1
                         });

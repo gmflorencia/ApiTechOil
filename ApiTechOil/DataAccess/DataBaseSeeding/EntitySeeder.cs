@@ -15,7 +15,10 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodUsuario = 1, Nombre = "Martin Cabrera", 
                         Dni = 31467581, 
                         PerfilUsuario = 1, 
-                        Clave = "1234" 
+                        Email = "martin@gmail.com",
+                        Clave = "1234",
+                        Activo = true
+                        
                     },
                     new Usuario
                     {
@@ -23,7 +26,9 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Nombre = "Florencia Gonzalez", 
                         Dni = 37053098, 
                         PerfilUsuario = 2,
-                        Clave = "5678" 
+                        Email = "florencia@gmail.com",
+                        Clave = "5678",
+                        Activo= true
                     },
                     new Usuario
                     {
@@ -31,7 +36,10 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Nombre = "Salome Cabrera", 
                         Dni = 58706438, 
                         PerfilUsuario = 1, 
-                        Clave = "5792" 
+                        Email= "salome@gmail.com",
+                        Clave = "5792",
+                        Activo = true
+
                     });
             modelBuilder.Entity<Proyectos>().HasData(
                     new Proyectos
@@ -39,14 +47,17 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodProyecto = 1,
                         Nombre = "Proyecto 001",
                         Direccion = "Sanchez 33, Glew",
-                        Estado = 2
+                        Estado = 2,
+                        Activo = true
+
                     },
                     new Proyectos
                     {
                         CodProyecto = 2,
                         Nombre = "Proyecto 002",
                         Direccion ="Santa fe 342, Lomas de Zamora",
-                        Estado = 1
+                        Estado = 1,
+                        Activo = true
                     },
                     new Proyectos
                     {
@@ -54,6 +65,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Nombre = "Proyecto 003",
                         Direccion = " Lavalle 1674, CABA",
                         Estado = 2,
+                        Activo = true
                     });
             modelBuilder.Entity<Servicios>().HasData(
                     new Servicios
@@ -68,7 +80,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodServicio= 2,
                         Descr = "Proyecto 002",
                         Estado = false,
-                        ValorHora = 0.25
+                        ValorHora = 0.25,
                     },
                     new Servicios
                     {
@@ -87,6 +99,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CantHoras = 28,
                         ValorHora= 0.25,
                         Costo = 150.000,
+                        Activo= true
                     },
                     new Trabajos
                     {
@@ -97,6 +110,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CantHoras = 28,
                         ValorHora = 0.25,
                         Costo = 180.000,
+                        Activo = true
 
                     },
                     new Trabajos
@@ -108,6 +122,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CantHoras = 28,
                         ValorHora = 0.25,
                         Costo = 190.000,
+                        Activo = true
 
                     });
         }

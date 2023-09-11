@@ -26,6 +26,10 @@ namespace ApiTechOil.Entities
         [Required]
         [Column ("Costo", TypeName = "decimal")]
         public double Costo { get; set; }
+        [Required]
+        [Column("Activo", TypeName = "bit")]
+        public bool Activo { get; set; }
+
 
     }
 }
