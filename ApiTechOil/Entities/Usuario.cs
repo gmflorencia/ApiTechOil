@@ -1,10 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApiTechOil.DTOs;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiTechOil.Entities
 {
     public class Usuario
     {
+        public Usuario(RegisterDto registerDto)
+        {
+            Nombre = registerDto.Nombre;
+            Dni = registerDto.Dni;
+            Email = registerDto.Email;
+            Clave = registerDto.Clave;
+        }
+        public Usuario()
+        {
+
+        }
+
         [Key]
         [Column("CodUsuario", TypeName = "int")]
         public int CodUsuario { get; set; }
@@ -28,6 +42,7 @@ namespace ApiTechOil.Entities
 
         [Required]
         [Column ("Activo", TypeName = "bit")]
+        [DefaultValue(true)]
         public bool Activo { get; set; }
 
 
