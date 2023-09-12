@@ -13,5 +13,9 @@ namespace ApiTechOil.Services
             _context = context;
             UsuarioRepository = new UsuarioRepository(_context);
         }
+        public Task<int> Complete()
+        {
+            return _context.SaveChangesAsync();
+        }
     }
 }
