@@ -74,12 +74,12 @@ namespace ApiTechOil.Migrations
                     PerfilUsuario = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "VARCHAR (100)", nullable: false),
                     CLave = table.Column<string>(type: "VARCHAR (100)", nullable: false),
-                    Activo = table.Column<bool>(type: "bit", nullable: false)
+                    Activo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.CodUsuario);
-                });
+                }) ;
 
             migrationBuilder.InsertData(
                 table: "Proyectos",
@@ -106,9 +106,9 @@ namespace ApiTechOil.Migrations
                 columns: new[] { "CodTrabajo", "Activo", "CantHoras", "CodProyecto", "CodServicio", "Costo", "Fecha", "ValorHora" },
                 values: new object[,]
                 {
-                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1673), 0.25m },
-                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1697), 0.25m },
-                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1700), 0.25m }
+                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 12, 0, 23, 2, 482, DateTimeKind.Local).AddTicks(6476), 0.25m },
+                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 12, 0, 23, 2, 482, DateTimeKind.Local).AddTicks(6487), 0.25m },
+                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 12, 0, 23, 2, 482, DateTimeKind.Local).AddTicks(6548), 0.25m }
                 });
 
             migrationBuilder.InsertData(

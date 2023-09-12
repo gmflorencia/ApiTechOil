@@ -178,7 +178,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 1,
                             CodServicio = 2,
                             Costo = 150m,
-                            Fecha = new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1673),
+                            Fecha = new DateTime(2023, 9, 12, 0, 23, 2, 482, DateTimeKind.Local).AddTicks(6476),
                             ValorHora = 0.25m
                         },
                         new
@@ -189,7 +189,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 2,
                             CodServicio = 3,
                             Costo = 180m,
-                            Fecha = new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1697),
+                            Fecha = new DateTime(2023, 9, 12, 0, 23, 2, 482, DateTimeKind.Local).AddTicks(6487),
                             ValorHora = 0.25m
                         },
                         new
@@ -200,7 +200,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 3,
                             CodServicio = 3,
                             Costo = 190m,
-                            Fecha = new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1700),
+                            Fecha = new DateTime(2023, 9, 12, 0, 23, 2, 482, DateTimeKind.Local).AddTicks(6548),
                             ValorHora = 0.25m
                         });
                 });
@@ -216,7 +216,8 @@ namespace ApiTechOil.Migrations
 
                     b.Property<bool>("Activo")
                         .HasColumnType("bit")
-                        .HasColumnName("Activo");
+                        .HasColumnName("Activo")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("Clave")
                         .IsRequired()
