@@ -1,8 +1,5 @@
 using ApiTechOil.DataAccess;
-using ApiTechOil.DataAccess.Repositories;
-using ApiTechOil.DataAccess.Repositories.Interfaces;
 using ApiTechOil.Services;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;

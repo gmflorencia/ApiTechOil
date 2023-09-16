@@ -1,4 +1,5 @@
 ﻿using ApiTechOil.DataAccess.Repositories.Interfaces;
+using ApiTechOil.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiTechOil.DataAccess.Repositories
@@ -15,6 +16,24 @@ namespace ApiTechOil.DataAccess.Repositories
         public virtual async Task<List<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
+        }
+        public virtual async Task<T> GetById(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+        public virtual async Task<bool> Insert(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+            return true;
+        }
+        public virtual Task<bool> Update(T Entity)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual Task<bool> Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

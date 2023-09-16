@@ -96,9 +96,9 @@ namespace ApiTechOil.Migrations
                 columns: new[] { "CodServicio", "Descr", "Estado", "ValorHora" },
                 values: new object[,]
                 {
-                    { 1, "Proyecto 001", true, 0.25m },
-                    { 2, "Proyecto 002", false, 0.25m },
-                    { 3, "Proyecto 003", true, 0.25m }
+                    { 1, "Servicio 001", true, 0.25m },
+                    { 2, "Servicio 002", false, 0.25m },
+                    { 3, "Servicio 003", true, 0.25m }
                 });
 
             migrationBuilder.InsertData(
@@ -106,9 +106,9 @@ namespace ApiTechOil.Migrations
                 columns: new[] { "CodTrabajo", "Activo", "CantHoras", "CodProyecto", "CodServicio", "Costo", "Fecha", "ValorHora" },
                 values: new object[,]
                 {
-                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1673), 0.25m },
-                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1697), 0.25m },
-                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 11, 19, 39, 52, 84, DateTimeKind.Local).AddTicks(1700), 0.25m }
+                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(861), 0.25m },
+                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(877), 0.25m },
+                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(879), 0.25m }
                 });
 
             migrationBuilder.InsertData(
