@@ -71,21 +71,21 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                     new Servicios
                     {
                         CodServicio = 1,
-                        Descr = "Proyecto 001",
+                        Descr = "Servicio 001",
                         Estado = true,
                         ValorHora = 0.25,
                     },
                     new Servicios
                     {
                         CodServicio= 2,
-                        Descr = "Proyecto 002",
+                        Descr = "Servicio 002",
                         Estado = false,
                         ValorHora = 0.25,
                     },
                     new Servicios
                     {
                         CodServicio = 3,
-                        Descr = "Proyecto 003",
+                        Descr = "Servicio 003",
                         Estado = true,
                         ValorHora = 0.25,
                     });
