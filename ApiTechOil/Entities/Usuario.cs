@@ -13,6 +13,18 @@ namespace ApiTechOil.Entities
             Dni = registerDto.Dni;
             Email = registerDto.Email;
             Clave = registerDto.Clave;
+            Activo = true;
+            PerfilUsuario = 1;
+        }
+        public Usuario(RegisterDto dto, int codUsuario)
+        {
+            CodUsuario = codUsuario;
+            Nombre = dto.Nombre;
+            Dni = dto.Dni;
+            Email = dto.Email;
+            Clave = dto.Clave;
+            Activo = true;
+            PerfilUsuario = 1;
         }
         public Usuario()
         {

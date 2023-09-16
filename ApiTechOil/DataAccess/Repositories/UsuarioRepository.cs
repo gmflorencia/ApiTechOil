@@ -16,38 +16,27 @@ namespace ApiTechOil.DataAccess.Repositories
         {
             return await _context.Usuarios.SingleOrDefaultAsync(x => x.Email == dto.Email && x.Clave == dto.Clave);
         }
-        /* private readonly AppDbContext _dbContext;
+        public override async Task<bool> Update(Usuario updateUsuario)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x=> x.CodUsuario == updateUsuario.CodUsuario);
+            if (usuario == null) { return false; }
+            usuario.Nombre = updateUsuario.Nombre;
+            usuario.Email = updateUsuario.Email;
+            usuario.Clave = updateUsuario.Clave;
+            usuario.Activo = updateUsuario.Activo;
 
-public UsuarioRepository(AppDbContext dbContext)
-{
-    _dbContext = dbContext;
-}
-public IEnumerable<Usuario> GetAllUsuarios()
-{
-    return _dbContext.Usuarios.ToList();
-}
-public Usuario GetUsuarioById(int codUsuario)
-{
-    return _dbContext.Usuarios.FirstOrDefault(p => p.CodUsuario == codUsuario);
-}
-public void AddUsuario(Usuario usuario)
-{
-    _dbContext.Usuarios.Add(usuario);
-    _dbContext.SaveChanges();
-}
-public void UpdateUsuario(Usuario usuario)
-{
-    _dbContext.Usuarios.Update(usuario);
-    _dbContext.SaveChanges();
-}
-public void DeleteUsuario(int codUsuario)
-{
-    var usuario = _dbContext.Usuarios.FirstOrDefault(p => p.CodUsuario == codUsuario);
-    if (usuario != null)
-    {
-        _dbContext.Usuarios.Remove(usuario);
-        _dbContext.SaveChanges();
-    }
-}*/
+            _context.Usuarios.Update(usuario);
+            return true;
+        }
+        public override async Task<bool> Delete(int id)
+        {
+            var usuario = await _context.Usuarios.Where(x => x.CodUsuario == id).FirstOrDefaultAsync();
+            if (usuario != null)
+            {
+                _context.Usuarios.Remove(usuario);
+            }
+
+            return true;
+        }
     }
 }

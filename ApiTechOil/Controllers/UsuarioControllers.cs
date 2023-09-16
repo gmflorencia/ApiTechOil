@@ -6,8 +6,6 @@ using ApiTechOil.Services;
 using Microsoft.AspNetCore.Authorization;
 using ApiTechOil.DTOs;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ApiTechOil.Controllers
 {
     [Route("api/Usuario")]
@@ -23,58 +21,60 @@ namespace ApiTechOil.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
 
             return usuarios;
         }
+        [HttpGet("{codUsuario}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Usuario>> GetUsuarioById(int codUsuario)
+        {
+            var usuario = await _unitOfWork.UsuarioRepository.GetById(codUsuario);
+            if (usuario == null)
+            {
+                return NotFound(); // Devuelve un resultado NotFound si el usuario no se encuentra.
+            }
+            return usuario;
+        }
+
         [HttpPost]
         [Route("Rergister")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
-            var usuario = new Usuario
-            {
-                Nombre = dto.Nombre,
-                Dni = dto.Dni,
-                Email = dto.Email,
-                Clave = dto.Clave,
-                Activo = true,
-                PerfilUsuario = 1
-            };
-            await _unitOfWork.UsuarioRepository.Insert(usuario);
+            await _unitOfWork.UsuarioRepository.Insert(new Usuario(dto));
             await _unitOfWork.Complete();
             return Ok(true);
         }
+        [HttpPut("{CodUsuario}")]
+        public async Task<IActionResult>Update([FromRoute] int CodUsuario, RegisterDto dto)
+        {
+            var result = await _unitOfWork.UsuarioRepository.Update(new Usuario(dto,CodUsuario));
+            if (result) await _unitOfWork.Complete();
+            return Ok(result);
+        }
+        [HttpDelete("{codUsuario}")]
 
-        //// PUT api/<ValuesController>/5
-        //[HttpPut("{codUsuario}"
-        //public IActionResult Put (int codUsuario, Usuario UpdateUsuario)
-        //{
-        //    //var usuario = _usuarioRepository.GetUsuarioById(codUsuario);
-        //    //if (usuario == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
-        //    //usuario.Nombre = UpdateUsuario.Nombre;
-        //    //usuario.Dni = UpdateUsuario.Dni;
-        //    //usuario.PerfilUsuario = UpdateUsuario.PerfilUsuario;
-        //    //usuario.Clave = UpdateUsuario.Clave;
-        //    //_usuarioRepository.UpdateUsuario(usuario);
-        //    return NoContent();
-        //}
-
-        //// DELETE api/<ValuesController>/5
-        //[HttpDelete("{codUsuario}")]
-        //public IActionResult Delete (int codUsuario)
-        //{
-        //    //var usuario = _usuarioRepository.GetUsuarioById(codUsuario);
-        //    //if (usuario == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
-        //    //_usuarioRepository.DeleteUsuario(codUsuario);
-        //    return NoContent();
-        //}
+        public async Task<IActionResult> Delete([FromRoute] int codUsuario)
+        {
+            Usuario usuario = await _unitOfWork.UsuarioRepository.GetById(codUsuario);
+            if (usuario == null)
+            {
+                return NotFound(); // Devuelve un resultado NotFound si el usuario no se encuentra.
+            }
+            var result = await _unitOfWork.UsuarioRepository.Update(new Usuario { 
+                CodUsuario = codUsuario,
+                Nombre = usuario.Nombre,
+                Dni = usuario.Dni,
+                Email = usuario.Email,
+                Clave = usuario.Clave,
+                PerfilUsuario = usuario.PerfilUsuario,
+                Activo = false
+            });
+            if (result) await _unitOfWork.Complete();
+            return Ok(result); 
+        }
     }
 }
