@@ -178,7 +178,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 1,
                             CodServicio = 2,
                             Costo = 150m,
-                            Fecha = new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(861),
+                            Fecha = new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4053),
                             ValorHora = 0.25m
                         },
                         new
@@ -189,7 +189,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 2,
                             CodServicio = 3,
                             Costo = 180m,
-                            Fecha = new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(877),
+                            Fecha = new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4071),
                             ValorHora = 0.25m
                         },
                         new
@@ -200,7 +200,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 3,
                             CodServicio = 3,
                             Costo = 190m,
-                            Fecha = new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(879),
+                            Fecha = new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4073),
                             ValorHora = 0.25m
                         });
                 });
@@ -250,7 +250,7 @@ namespace ApiTechOil.Migrations
                         {
                             CodUsuario = 1,
                             Activo = true,
-                            Clave = "1234",
+                            Clave = "665117e5124b9ff0cc0d4e8d408fdc2c8b9d026d070ccbdd84a0ce8da6285061",
                             Dni = 31467581,
                             Email = "martin@gmail.com",
                             Nombre = "Martin Cabrera",
@@ -260,7 +260,7 @@ namespace ApiTechOil.Migrations
                         {
                             CodUsuario = 2,
                             Activo = true,
-                            Clave = "5678",
+                            Clave = "9d3846caf71f436b90f7ea82a220d742aecc3134c5e41fa97f8ada2d87800c87",
                             Dni = 37053098,
                             Email = "florencia@gmail.com",
                             Nombre = "Florencia Gonzalez",
@@ -270,7 +270,7 @@ namespace ApiTechOil.Migrations
                         {
                             CodUsuario = 3,
                             Activo = true,
-                            Clave = "5792",
+                            Clave = "596f1c58d2fdc24d238dfbd538852855c03c74e1d2c394cb218fec9de06b5982",
                             Dni = 58706438,
                             Email = "salome@gmail.com",
                             Nombre = "Salome Cabrera",
