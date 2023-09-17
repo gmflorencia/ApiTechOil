@@ -1,7 +1,8 @@
 ﻿using ApiTechOil.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
+using ApiTechOil.Helpers;
 using System.Collections.Generic;
+
 
 namespace ApiTechOil.DataAccess.DataBaseSeeding
 {
@@ -16,7 +17,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Dni = 31467581, 
                         PerfilUsuario = 1, 
                         Email = "martin@gmail.com",
-                        Clave = "1234",
+                        Clave = ClaveEncryptHelper.EncryptClave("1234", "martin@gmail.com"),
                         Activo = true
                         
                     },
@@ -27,8 +28,8 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Dni = 37053098, 
                         PerfilUsuario = 2,
                         Email = "florencia@gmail.com",
-                        Clave = "5678",
-                        Activo= true
+                        Clave = ClaveEncryptHelper.EncryptClave("5678", "florencia@gmail.com"),
+                        Activo = true
                     },
                     new Usuario
                     {
@@ -37,7 +38,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Dni = 58706438, 
                         PerfilUsuario = 1, 
                         Email= "salome@gmail.com",
-                        Clave = "5792",
+                        Clave = ClaveEncryptHelper.EncryptClave("5792", "salome@gmail.com"),
                         Activo = true
 
                     });

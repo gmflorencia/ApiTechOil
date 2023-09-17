@@ -3,6 +3,7 @@ using ApiTechOil.DataAccess;
 using ApiTechOil.Entities;
 using ApiTechOil.DataAccess.Repositories.Interfaces;
 using ApiTechOil.DTOs;
+using ApiTechOil.Helpers;
 
 namespace ApiTechOil.DataAccess.Repositories
 {
@@ -14,7 +15,7 @@ namespace ApiTechOil.DataAccess.Repositories
         }
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
-            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Email == dto.Email && x.Clave == dto.Clave);
+            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Email == dto.Email && x.Clave == ClaveEncryptHelper.EncryptClave(dto.Clave, dto.Email));
         }
         public override async Task<bool> Update(Usuario updateUsuario)
         {

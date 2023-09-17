@@ -106,9 +106,9 @@ namespace ApiTechOil.Migrations
                 columns: new[] { "CodTrabajo", "Activo", "CantHoras", "CodProyecto", "CodServicio", "Costo", "Fecha", "ValorHora" },
                 values: new object[,]
                 {
-                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(861), 0.25m },
-                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(877), 0.25m },
-                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 15, 20, 51, 0, 96, DateTimeKind.Local).AddTicks(879), 0.25m }
+                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4053), 0.25m },
+                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4071), 0.25m },
+                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4073), 0.25m }
                 });
 
             migrationBuilder.InsertData(
@@ -116,9 +116,9 @@ namespace ApiTechOil.Migrations
                 columns: new[] { "CodUsuario", "Activo", "CLave", "Dni", "Email", "Nombre", "PerfilUsuario" },
                 values: new object[,]
                 {
-                    { 1, true, "1234", 31467581, "martin@gmail.com", "Martin Cabrera", 1 },
-                    { 2, true, "5678", 37053098, "florencia@gmail.com", "Florencia Gonzalez", 2 },
-                    { 3, true, "5792", 58706438, "salome@gmail.com", "Salome Cabrera", 1 }
+                    { 1, true, "665117e5124b9ff0cc0d4e8d408fdc2c8b9d026d070ccbdd84a0ce8da6285061", 31467581, "martin@gmail.com", "Martin Cabrera", 1 },
+                    { 2, true, "9d3846caf71f436b90f7ea82a220d742aecc3134c5e41fa97f8ada2d87800c87", 37053098, "florencia@gmail.com", "Florencia Gonzalez", 2 },
+                    { 3, true, "596f1c58d2fdc24d238dfbd538852855c03c74e1d2c394cb218fec9de06b5982", 58706438, "salome@gmail.com", "Salome Cabrera", 1 }
                 });
         }
 

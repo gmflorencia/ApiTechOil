@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Entities
 {
@@ -12,17 +13,17 @@ namespace ApiTechOil.Entities
             Nombre = registerDto.Nombre;
             Dni = registerDto.Dni;
             Email = registerDto.Email;
-            Clave = registerDto.Clave;
+            Clave = ClaveEncryptHelper.EncryptClave(registerDto.Clave, registerDto.Email);
             Activo = true;
             PerfilUsuario = 1;
         }
-        public Usuario(RegisterDto dto, int codUsuario)
+        public Usuario(RegisterDto registerDto, int codUsuario)
         {
             CodUsuario = codUsuario;
-            Nombre = dto.Nombre;
-            Dni = dto.Dni;
-            Email = dto.Email;
-            Clave = dto.Clave;
+            Nombre = registerDto.Nombre;
+            Dni = registerDto.Dni;
+            Email = registerDto.Email;
+            Clave = ClaveEncryptHelper.EncryptClave(registerDto.Clave, registerDto.Email);
             Activo = true;
             PerfilUsuario = 1;
         }
