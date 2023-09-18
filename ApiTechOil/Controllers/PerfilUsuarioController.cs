@@ -1,5 +1,6 @@
 ﻿using ApiTechOil.DTOs;
 using ApiTechOil.Entities;
+using ApiTechOil.Infraestructure;
 using ApiTechOil.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,22 +18,22 @@ namespace ApiTechOil.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PerfilUsuario>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var PerfilUsuario = await _unitOfWork.PerfilUsuarioRepository.GetAll();
 
-            return PerfilUsuario;
+            return ResponseFactory.CreateSuccessResponse(200, PerfilUsuario);
         }
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<PerfilUsuario>> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var perfilUsuario = await _unitOfWork.PerfilUsuarioRepository.GetById(id);
             if (perfilUsuario == null)
             {
-                return NotFound();
+                return ResponseFactory.CreateSuccessResponse(404, "Perfil NO encontrado!");
             }
-            return perfilUsuario;
+            return ResponseFactory.CreateSuccessResponse(200, perfilUsuario);
         }
 
         [Authorize(Policy = "Administrador")]
@@ -44,7 +45,7 @@ namespace ApiTechOil.Controllers
             var perfilUsuario = new PerfilUsuario(dto);
             await _unitOfWork.PerfilUsuarioRepository.Insert(perfilUsuario);
             await _unitOfWork.Complete();
-            return Ok(true);
+            return ResponseFactory.CreateSuccessResponse(201, "Perfil registrado con exito!");
 
         }
 
@@ -54,8 +55,15 @@ namespace ApiTechOil.Controllers
         {
             var result = await _unitOfWork.PerfilUsuarioRepository.Update(new PerfilUsuario(dto, id));
 
-            await _unitOfWork.Complete();
-            return Ok(true);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el perfil");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
         }
 
         [Authorize(Policy = "Administrador")]
@@ -73,8 +81,15 @@ namespace ApiTechOil.Controllers
                 Descripcion = perfilUsuario.Descripcion,
                 Activo = false
             });
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el perfil");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
+            }
         }
     }
 }
