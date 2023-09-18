@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ApiTechOil.Helpers;
 using System.Collections.Generic;
-
+using System.Data;
+using ApiTechOil.DTOs;
 
 namespace ApiTechOil.DataAccess.DataBaseSeeding
 {
@@ -11,21 +12,22 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
         public void SeedDataBase(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().HasData(
-                    new Usuario 
-                    { 
-                        CodUsuario = 1, Nombre = "Martin Cabrera", 
-                        Dni = 31467581, 
-                        PerfilUsuario = 1, 
+                    new Usuario
+                    {
+                        CodUsuario = 1,
+                        Nombre = "Martin Cabrera",
+                        Dni = 31467581,
+                        PerfilUsuario = 1,
                         Email = "martin@gmail.com",
                         Clave = ClaveEncryptHelper.EncryptClave("1234", "martin@gmail.com"),
                         Activo = true
-                        
+
                     },
                     new Usuario
                     {
-                        CodUsuario = 2, 
-                        Nombre = "Florencia Gonzalez", 
-                        Dni = 37053098, 
+                        CodUsuario = 2,
+                        Nombre = "Florencia Gonzalez",
+                        Dni = 37053098,
                         PerfilUsuario = 2,
                         Email = "florencia@gmail.com",
                         Clave = ClaveEncryptHelper.EncryptClave("5678", "florencia@gmail.com"),
@@ -33,11 +35,11 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                     },
                     new Usuario
                     {
-                        CodUsuario = 3, 
-                        Nombre = "Salome Cabrera", 
-                        Dni = 58706438, 
-                        PerfilUsuario = 1, 
-                        Email= "salome@gmail.com",
+                        CodUsuario = 3,
+                        Nombre = "Salome Cabrera",
+                        Dni = 58706438,
+                        PerfilUsuario = 1,
+                        Email = "salome@gmail.com",
                         Clave = ClaveEncryptHelper.EncryptClave("5792", "salome@gmail.com"),
                         Activo = true
 
@@ -56,7 +58,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                     {
                         CodProyecto = 2,
                         Nombre = "Proyecto 002",
-                        Direccion ="Santa fe 342, Lomas de Zamora",
+                        Direccion = "Santa fe 342, Lomas de Zamora",
                         Estado = 1,
                         Activo = true
                     },
@@ -78,7 +80,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                     },
                     new Servicios
                     {
-                        CodServicio= 2,
+                        CodServicio = 2,
                         Descr = "Servicio 002",
                         Estado = false,
                         ValorHora = 0.25,
@@ -98,9 +100,9 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodProyecto = 1,
                         CodServicio = 2,
                         CantHoras = 28,
-                        ValorHora= 0.25,
+                        ValorHora = 0.25,
                         Costo = 150.000,
-                        Activo= true
+                        Activo = true
                     },
                     new Trabajos
                     {
@@ -126,6 +128,19 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Activo = true
 
                     });
+            modelBuilder.Entity<PerfilUsuario>().HasData(
+                new PerfilUsuario
+                {
+                    Id = 1,
+                    Descripcion = "Administrador",
+                    Activo = true,
+                },
+                new PerfilUsuario
+                {
+                    Id = 2,
+                    Descripcion = "Consultor",
+                    Activo = true,
+                });
         }
     }
 }
