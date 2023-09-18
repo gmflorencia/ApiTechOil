@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiTechOil.Entities;
 using ApiTechOil.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using ApiTechOil.Infraestructure;
 
 namespace ApiTechOil.Controllers
 {
@@ -19,36 +20,36 @@ namespace ApiTechOil.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Proyectos>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var proyectos = await _unitOfWork.ProyectosRepository.GetAll();
 
-            return proyectos;
+            return ResponseFactory.CreateSuccessResponse(200, proyectos);
         }
 
         [HttpGet("{codProyecto}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Proyectos>> GetProyectoById(int codProyecto)
+        public async Task<IActionResult> GetProyectoById(int codProyecto)
         {
             var proyecto = await _unitOfWork.ProyectosRepository.GetById(codProyecto);
             if (proyecto == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Proyecto NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
-            return proyecto;
+            return ResponseFactory.CreateSuccessResponse(200, proyecto);
         }
 
         [HttpGet]
-        [Route("/estado/{estado}")]
+        [Route("/api/Proyecto/estado/{estado}")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Proyectos>>> GetByEstado(int estado)
+        public async Task<IActionResult> GetByEstado(int estado)
         {
             var proyectos = await _unitOfWork.ProyectosRepository.GetByEstado(estado);
-            if (proyectos != null)
+            if (!proyectos.Any())
             {
-                return proyectos;
+                return ResponseFactory.CreateSuccessResponse(404, "NO existe estado o no hay proyecto con este estado!");
             }
-            return NotFound();
+            return ResponseFactory.CreateSuccessResponse(200, proyectos);
         }
 
         [Authorize(Policy = "Administrador")]
@@ -58,7 +59,7 @@ namespace ApiTechOil.Controllers
         {
             await _unitOfWork.ProyectosRepository.Insert(new Proyectos(dto));
             await _unitOfWork.Complete();
-            return Ok(true);
+            return ResponseFactory.CreateSuccessResponse(201, "Proyecto registrado con exito!");
         }
 
         [Authorize(Policy = "Administrador")]
@@ -66,29 +67,44 @@ namespace ApiTechOil.Controllers
         public async Task<IActionResult> Update([FromRoute] int codProyecto, ProyectosDto dto)
         {
             var result = await _unitOfWork.ProyectosRepository.Update(new Proyectos(dto, codProyecto));
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el proyecto");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
         }
 
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{codProyecto}")]
         public async Task<IActionResult> Delete([FromRoute] int codProyecto)
         {
-            Proyectos proyectos = await _unitOfWork.ProyectosRepository.GetById(codProyecto);
-            if (proyectos == null)
+            Proyectos proyecto = await _unitOfWork.ProyectosRepository.GetById(codProyecto);
+            if (proyecto == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el usuario no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Proyecto NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
             var result = await _unitOfWork.ProyectosRepository.Update(new Proyectos
             {
                 CodProyecto = codProyecto,
-                Nombre = proyectos.Nombre,
-                Direccion = proyectos.Direccion,
-                Estado = proyectos.Estado,
+                Nombre = proyecto.Nombre,
+                Direccion = proyecto.Direccion,
+                Estado = proyecto.Estado,
                 Activo = false
             });
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el proyecto");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
+            }
         }
     }
 }

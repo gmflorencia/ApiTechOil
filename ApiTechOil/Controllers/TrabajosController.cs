@@ -3,6 +3,7 @@ using ApiTechOil.Entities;
 using ApiTechOil.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using ApiTechOil.Infraestructure;
 
 namespace ApiTechOil.Controllers
 {
@@ -19,23 +20,23 @@ namespace ApiTechOil.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Trabajos>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var trabajos = await _unitOfWork.TrabajosRepository.GetAll();
 
-            return trabajos;
+            return ResponseFactory.CreateSuccessResponse(200, trabajos);
         }
 
         [HttpGet("{codTrabajo}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Trabajos>> GetTrabajoById(int codTrabajo)
+        public async Task<IActionResult> GetTrabajoById(int codTrabajo)
         {
             var trabajo = await _unitOfWork.TrabajosRepository.GetById(codTrabajo);
             if (trabajo == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Trabajo NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
-            return trabajo;
+            return ResponseFactory.CreateSuccessResponse(200, trabajo);
         }
 
         [Authorize(Policy = "Administrador")]
@@ -45,7 +46,7 @@ namespace ApiTechOil.Controllers
         {
             await _unitOfWork.TrabajosRepository.Insert(new Trabajos(dto));
             await _unitOfWork.Complete();
-            return Ok(true);
+            return ResponseFactory.CreateSuccessResponse(201, "Trabajo registrado con exito!");
         }
 
         [Authorize(Policy = "Administrador")]
@@ -53,8 +54,15 @@ namespace ApiTechOil.Controllers
         public async Task<IActionResult> Update([FromRoute] int codTrabajo, TrabajosDto dto)
         {
             var result = await _unitOfWork.TrabajosRepository.Update(new Trabajos(dto, codTrabajo));
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el trabajo");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
         }
 
         [Authorize(Policy = "Administrador")]
@@ -64,7 +72,7 @@ namespace ApiTechOil.Controllers
             Trabajos trabajos = await _unitOfWork.TrabajosRepository.GetById(codTrabajo);
             if (trabajos == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el trabajo no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Trabajo NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
             var result = await _unitOfWork.TrabajosRepository.Update(new Trabajos
             {
@@ -75,8 +83,15 @@ namespace ApiTechOil.Controllers
                 Costo=trabajos.Costo,
                 Activo = false,
             });
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el trabajo");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
+            }
         }
     }
 }

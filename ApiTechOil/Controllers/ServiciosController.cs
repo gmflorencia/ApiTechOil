@@ -5,6 +5,7 @@ using ApiTechOil.Entities;
 using ApiTechOil.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using ApiTechOil.Infraestructure;
 
 namespace ApiTechOil.Controllers
 {
@@ -21,36 +22,36 @@ namespace ApiTechOil.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Servicios>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var servicios = await _unitOfWork.ServiciosRepository.GetAll();
 
-            return servicios;
+            return ResponseFactory.CreateSuccessResponse(200, servicios);
         }
 
         [HttpGet]
         [Route("estado/{estado}")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Servicios>>> GetByEstado(bool estado)
+        public async Task<IActionResult> GetByEstado(bool estado)
         {
             var servicios = await _unitOfWork.ServiciosRepository.GetByEstado(estado);
-            if (servicios != null)
+            if (!servicios.Any())
             {
-                return servicios;
+                return ResponseFactory.CreateSuccessResponse(404, "NO existen servicios en esta condición " + estado);
             }
-            return NotFound();
+            return ResponseFactory.CreateSuccessResponse(200, servicios);
         }
 
         [HttpGet("{codServicio}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Servicios>> GetServicioById(int codServicio)
+        public async Task<IActionResult> GetServicioById(int codServicio)
         {
             var servicio = await _unitOfWork.ServiciosRepository.GetById(codServicio);
             if (servicio == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
-            return servicio;
+            return ResponseFactory.CreateSuccessResponse(200, servicio);
         }
 
         [Authorize(Policy = "Administrador")]
@@ -60,7 +61,7 @@ namespace ApiTechOil.Controllers
         {
             await _unitOfWork.ServiciosRepository.Insert(new Servicios(dto));
             await _unitOfWork.Complete();
-            return Ok(true);
+            return ResponseFactory.CreateSuccessResponse(201, "Servicio registrado con exito!");
         }
 
         [Authorize(Policy = "Administrador")]
@@ -68,27 +69,43 @@ namespace ApiTechOil.Controllers
         public async Task<IActionResult> Update([FromRoute] int codServicio, ServiciosDto dto)
         {
             var result = await _unitOfWork.ServiciosRepository.Update(new Servicios(dto, codServicio));
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el servicio");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
         }
 
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{codServicio}")]
         public async Task<IActionResult> Delete([FromRoute] int codServicio)
         {
-            Servicios servicios = await _unitOfWork.ServiciosRepository.GetById(codServicio);
-            if (servicios == null)
+            Servicios servicio = await _unitOfWork.ServiciosRepository.GetById(codServicio);
+            if (servicio == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el servicio no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
+            return ResponseFactory.CreateSuccessResponse(200, servicio);
+
             var result = await _unitOfWork.ServiciosRepository.Update(new Servicios
             {
                 CodServicio = codServicio,
-                Descr = servicios.Descr,
+                Descr = servicio.Descr,
                 Estado = false,
             });
-            if (result) await _unitOfWork.Complete();
-            return Ok(result);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el servicio");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
         }
     }
 }
