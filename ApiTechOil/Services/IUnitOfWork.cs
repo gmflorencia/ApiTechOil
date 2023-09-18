@@ -9,6 +9,7 @@ namespace ApiTechOil.Services
         public ServiciosRepository ServiciosRepository { get; }
         public TrabajosRepository TrabajosRepository { get; }
         public UsuarioRepository UsuarioRepository { get; }
+        public PerfilUsuarioRepository PerfilUsuarioRepository { get; }
         Task<int> Complete();
     }
     

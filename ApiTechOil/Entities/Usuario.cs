@@ -35,15 +35,21 @@ namespace ApiTechOil.Entities
         [Key]
         [Column("CodUsuario", TypeName = "int")]
         public int CodUsuario { get; set; }
+
         [Required]
         [Column("Nombre", TypeName = "VARCHAR (100)")]
-        public string Nombre { get; set; }  
+        public string Nombre { get; set; }
+
         [Required]
         [Column("Dni", TypeName = "int")]
         public int Dni { get; set; }
+
         [Required]
-        [Column("PerfilUsuario", TypeName = "int")]
+        [Column("PerfilUsuario")]
         public int PerfilUsuario { get; set; }
+
+        [ForeignKey("PerfilUsuario")]
+        public PerfilUsuario Id { get; set; }
 
         [Required]
         [Column("Email", TypeName = "VARCHAR (100)")]
@@ -55,7 +61,6 @@ namespace ApiTechOil.Entities
 
         [Required]
         [Column ("Activo", TypeName = "bit")]
-        [DefaultValue(true)]
         public bool Activo { get; set; }
 
 

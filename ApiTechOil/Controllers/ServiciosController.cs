@@ -27,10 +27,10 @@ namespace ApiTechOil.Controllers
 
             return servicios;
         }
+
         [HttpGet]
         [Route("estado/{estado}")]
         [AllowAnonymous]
-
         public async Task<ActionResult<IEnumerable<Servicios>>> GetByEstado(bool estado)
         {
             var servicios = await _unitOfWork.ServiciosRepository.GetByEstado(estado);
@@ -40,7 +40,6 @@ namespace ApiTechOil.Controllers
             }
             return NotFound();
         }
-
 
         [HttpGet("{codServicio}")]
         [AllowAnonymous]
@@ -53,6 +52,8 @@ namespace ApiTechOil.Controllers
             }
             return servicio;
         }
+
+        [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(ServiciosDto dto)
@@ -61,6 +62,8 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return Ok(true);
         }
+
+        [Authorize(Policy = "Administrador")]
         [HttpPut("{codServicio}")]
         public async Task<IActionResult> Update([FromRoute] int codServicio, ServiciosDto dto)
         {
@@ -68,8 +71,9 @@ namespace ApiTechOil.Controllers
             if (result) await _unitOfWork.Complete();
             return Ok(result);
         }
-        [HttpDelete("{codServicio}")]
 
+        [Authorize(Policy = "Administrador")]
+        [HttpDelete("{codServicio}")]
         public async Task<IActionResult> Delete([FromRoute] int codServicio)
         {
             Servicios servicios = await _unitOfWork.ServiciosRepository.GetById(codServicio);
@@ -86,6 +90,5 @@ namespace ApiTechOil.Controllers
             if (result) await _unitOfWork.Complete();
             return Ok(result);
         }
-
     }
 }

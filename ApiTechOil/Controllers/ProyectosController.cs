@@ -25,6 +25,7 @@ namespace ApiTechOil.Controllers
 
             return proyectos;
         }
+
         [HttpGet("{codProyecto}")]
         [AllowAnonymous]
         public async Task<ActionResult<Proyectos>> GetProyectoById(int codProyecto)
@@ -50,6 +51,7 @@ namespace ApiTechOil.Controllers
             return NotFound();
         }
 
+        [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(ProyectosDto dto)
@@ -58,6 +60,8 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return Ok(true);
         }
+
+        [Authorize(Policy = "Administrador")]
         [HttpPut("{codProyecto}")]
         public async Task<IActionResult> Update([FromRoute] int codProyecto, ProyectosDto dto)
         {
@@ -65,8 +69,9 @@ namespace ApiTechOil.Controllers
             if (result) await _unitOfWork.Complete();
             return Ok(result);
         }
-        [HttpDelete("{codProyecto}")]
 
+        [Authorize(Policy = "Administrador")]
+        [HttpDelete("{codProyecto}")]
         public async Task<IActionResult> Delete([FromRoute] int codProyecto)
         {
             Proyectos proyectos = await _unitOfWork.ProyectosRepository.GetById(codProyecto);

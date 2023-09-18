@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiTechOil.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230917012525_TechOil")]
+    [Migration("20230918000120_TechOil")]
     partial class TechOil
     {
         /// <inheritdoc />
@@ -24,6 +24,43 @@ namespace ApiTechOil.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ApiTechOil.Entities.PerfilUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Activo");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR (100)")
+                        .HasColumnName("Descripcion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PerfilUsuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Activo = true,
+                            Descripcion = "Administrador"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Activo = true,
+                            Descripcion = "Consultor"
+                        });
+                });
 
             modelBuilder.Entity("ApiTechOil.Entities.Proyectos", b =>
                 {
@@ -151,10 +188,12 @@ namespace ApiTechOil.Migrations
                         .HasColumnName("CantHoras");
 
                     b.Property<int>("CodProyecto")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("CodProyecto");
 
                     b.Property<int>("CodServicio")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("CodServicio");
 
                     b.Property<decimal>("Costo")
                         .HasColumnType("decimal")
@@ -170,6 +209,10 @@ namespace ApiTechOil.Migrations
 
                     b.HasKey("CodTrabajo");
 
+                    b.HasIndex("CodProyecto");
+
+                    b.HasIndex("CodServicio");
+
                     b.ToTable("Trabajos");
 
                     b.HasData(
@@ -181,7 +224,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 1,
                             CodServicio = 2,
                             Costo = 150m,
-                            Fecha = new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4053),
+                            Fecha = new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3574),
                             ValorHora = 0.25m
                         },
                         new
@@ -192,7 +235,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 2,
                             CodServicio = 3,
                             Costo = 180m,
-                            Fecha = new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4071),
+                            Fecha = new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3587),
                             ValorHora = 0.25m
                         },
                         new
@@ -203,7 +246,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 3,
                             CodServicio = 3,
                             Costo = 190m,
-                            Fecha = new DateTime(2023, 9, 16, 22, 25, 25, 253, DateTimeKind.Local).AddTicks(4073),
+                            Fecha = new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3588),
                             ValorHora = 0.25m
                         });
                 });
@@ -246,6 +289,8 @@ namespace ApiTechOil.Migrations
 
                     b.HasKey("CodUsuario");
 
+                    b.HasIndex("PerfilUsuario");
+
                     b.ToTable("Usuarios");
 
                     b.HasData(
@@ -279,6 +324,36 @@ namespace ApiTechOil.Migrations
                             Nombre = "Salome Cabrera",
                             PerfilUsuario = 1
                         });
+                });
+
+            modelBuilder.Entity("ApiTechOil.Entities.Trabajos", b =>
+                {
+                    b.HasOne("ApiTechOil.Entities.Proyectos", "Proyectos")
+                        .WithMany()
+                        .HasForeignKey("CodProyecto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApiTechOil.Entities.Servicios", "Servicios")
+                        .WithMany()
+                        .HasForeignKey("CodServicio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Proyectos");
+
+                    b.Navigation("Servicios");
+                });
+
+            modelBuilder.Entity("ApiTechOil.Entities.Usuario", b =>
+                {
+                    b.HasOne("ApiTechOil.Entities.PerfilUsuario", "Id")
+                        .WithMany()
+                        .HasForeignKey("PerfilUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Id");
                 });
 #pragma warning restore 612, 618
         }

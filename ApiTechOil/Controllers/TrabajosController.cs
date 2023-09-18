@@ -16,6 +16,7 @@ namespace ApiTechOil.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Trabajos>>> GetAll()
@@ -24,6 +25,7 @@ namespace ApiTechOil.Controllers
 
             return trabajos;
         }
+
         [HttpGet("{codTrabajo}")]
         [AllowAnonymous]
         public async Task<ActionResult<Trabajos>> GetTrabajoById(int codTrabajo)
@@ -35,6 +37,8 @@ namespace ApiTechOil.Controllers
             }
             return trabajo;
         }
+
+        [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(TrabajosDto dto)
@@ -43,6 +47,8 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return Ok(true);
         }
+
+        [Authorize(Policy = "Administrador")]
         [HttpPut("{codTrabajo}")]
         public async Task<IActionResult> Update([FromRoute] int codTrabajo, TrabajosDto dto)
         {
@@ -50,8 +56,9 @@ namespace ApiTechOil.Controllers
             if (result) await _unitOfWork.Complete();
             return Ok(result);
         }
-        [HttpDelete("{codTrabajo}")]
 
+        [Authorize(Policy = "Administrador")]
+        [HttpDelete("{codTrabajo}")]
         public async Task<IActionResult> Delete([FromRoute] int codTrabajo)
         {
             Trabajos trabajos = await _unitOfWork.TrabajosRepository.GetById(codTrabajo);
@@ -72,5 +79,4 @@ namespace ApiTechOil.Controllers
             return Ok(result);
         }
     }
-    
 }
