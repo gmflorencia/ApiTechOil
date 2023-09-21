@@ -21,10 +21,9 @@ namespace ApiTechOil.Controllers
         }
 
         /// <summary>
-        ///  Devuelve todo los usuarios
+        ///  Devuelve todo los Usuarios
         /// </summary>
-        /// <returns>retorna un 200 todos los usuarios</returns>
-        /// 
+        /// <returns>retorna un statusCode 200 todos los Usuarios</returns>
 
         [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
@@ -36,9 +35,9 @@ namespace ApiTechOil.Controllers
         }
 
         /// <summary>
-        ///  Devuelve un usuario
+        ///  Devuelve un Usuario
         /// </summary>
-        /// <returns>retorna un statusCode 200 usuario</returns>
+        /// <returns>retorna un statusCode 200 Usuario</returns>
 
         [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codUsuario}")]
@@ -53,9 +52,9 @@ namespace ApiTechOil.Controllers
         }
 
         /// <summary>
-        ///  Registra un nuevo usuario
+        ///  Registra un nuevo Usuario
         /// </summary>
-        /// <returns>retorna usuario registrado con un statusCode 200</returns>
+        /// <returns>retorna Usuario registrado con un statusCode 200</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPost]
@@ -66,10 +65,11 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Usuario registrado con exito!");
         }
+
         /// <summary>
-        ///  Actualiza un usuario
+        ///  Actualiza un Usuario
         /// </summary>
-        /// <returns>retorna usuario actualizado on un statusCode 201</returns>
+        /// <returns>retorna un Usuario actualizado o un statusCode 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{CodUsuario}")]
@@ -88,7 +88,7 @@ namespace ApiTechOil.Controllers
         }
 
         /// <summary>
-        ///  Elimina un usuario
+        ///  Elimina un Usuario
         /// </summary>
         /// <returns> retorna Usuario eliminado o un 500</returns>
         

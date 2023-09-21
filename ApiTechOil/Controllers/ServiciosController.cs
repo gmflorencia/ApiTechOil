@@ -20,8 +20,13 @@ namespace ApiTechOil.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        ///  Devuelve todo los Servicios
+        /// </summary>
+        /// <returns>retorna un statusCode 200 todos los Servicios</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var servicios = await _unitOfWork.ServiciosRepository.GetAll();
@@ -29,9 +34,14 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, servicios);
         }
 
+        /// <summary>
+        ///  Devuelve todo los Servicios activos
+        /// </summary>
+        /// <returns>retorna un statusCode 200 todos los Servicios activos</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("estado/{estado}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetByEstado(bool estado)
         {
             var servicios = await _unitOfWork.ServiciosRepository.GetByEstado(estado);
@@ -42,17 +52,27 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, servicios);
         }
 
+        /// <summary>
+        ///  Devuelve un Servicio
+        /// </summary>
+        /// <returns>retorna un statusCode 200 un Servicio</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codServicio}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetServicioById(int codServicio)
         {
             var servicio = await _unitOfWork.ServiciosRepository.GetById(codServicio);
             if (servicio == null)
             {
-                return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); 
             }
             return ResponseFactory.CreateSuccessResponse(200, servicio);
         }
+
+        /// <summary>
+        ///  Registra un nuevo Servicio 
+        /// </summary>
+        /// <returns>retorna un Servicio registrado con un statusCode 200</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPost]
@@ -63,6 +83,11 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Servicio registrado con exito!");
         }
+
+        /// <summary>
+        ///  Actualiza un Servicio
+        /// </summary>
+        /// <returns>retorna Servicio actualizado o un statusCode 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{codServicio}")]
@@ -80,6 +105,11 @@ namespace ApiTechOil.Controllers
             }
         }
 
+        /// <summary>
+        ///  Elimina un Servicio
+        /// </summary>
+        /// <returns> retorna Servicio eliminado o un 500</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{codServicio}")]
         public async Task<IActionResult> Delete([FromRoute] int codServicio)
@@ -87,7 +117,7 @@ namespace ApiTechOil.Controllers
             Servicios servicio = await _unitOfWork.ServiciosRepository.GetById(codServicio);
             if (servicio == null)
             {
-                return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); 
             }
             return ResponseFactory.CreateSuccessResponse(200, servicio);
 

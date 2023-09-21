@@ -18,8 +18,13 @@ namespace ApiTechOil.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        ///  Devuelve todos los Proyectos
+        /// </summary>
+        /// <returns>retorna un statusCode 200 todos los Proyectos</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var proyectos = await _unitOfWork.ProyectosRepository.GetAll();
@@ -27,21 +32,31 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, proyectos);
         }
 
+        /// <summary>
+        ///  Devuelve un Proyecto
+        /// </summary>
+        /// <returns>retorna un statusCode 200 un Proyecto</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codProyecto}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetProyectoById(int codProyecto)
         {
             var proyecto = await _unitOfWork.ProyectosRepository.GetById(codProyecto);
             if (proyecto == null)
             {
-                return ResponseFactory.CreateSuccessResponse(404, "Proyecto NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Proyecto NO encontrado!"); 
             }
             return ResponseFactory.CreateSuccessResponse(200, proyecto);
         }
 
+        /// <summary>
+        ///  Devuelve Proyectos por estado ingresado
+        /// </summary>
+        /// <returns>retorna un statusCode 200 Proyectos por estado ingresado</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("/api/Proyecto/estado/{estado}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetByEstado(int estado)
         {
             var proyectos = await _unitOfWork.ProyectosRepository.GetByEstado(estado);
@@ -52,6 +67,11 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, proyectos);
         }
 
+        /// <summary>
+        ///  Registra un nuevo Proyecto
+        /// </summary>
+        /// <returns>retorna un Proyecto registrado o un statusCode 200</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
@@ -61,6 +81,11 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Proyecto registrado con exito!");
         }
+
+        /// <summary>
+        ///  Actualiza un Proyecto
+        /// </summary>
+        /// <returns>retorna Proyecto actualizado o un statusCode 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{codProyecto}")]
@@ -78,6 +103,11 @@ namespace ApiTechOil.Controllers
                 return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
             }
         }
+
+        /// <summary>
+        ///  Elimina un Proyecto
+        /// </summary>
+        /// <returns> retorna Proyecto eliminado o un 500</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{codProyecto}")]

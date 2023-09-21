@@ -21,7 +21,7 @@ namespace ApiTechOil.Controllers
         /// <summary>
         ///  Devuelve todo los trabajos
         /// </summary>
-        /// <returns>retorna todos los trabajos</returns>
+        /// <returns>retorna un statusCode 200 todos los trabajos</returns>
 
         [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
@@ -35,7 +35,7 @@ namespace ApiTechOil.Controllers
         /// <summary>
         ///  Devuelve un trabajo
         /// </summary>
-        /// <returns>retorna un trabajo</returns>
+        /// <returns>retorna un statusCode 200 trabajo</returns>
 
         [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codTrabajo}")]
@@ -67,7 +67,7 @@ namespace ApiTechOil.Controllers
         /// <summary>
         ///  Devuelve un trabajo 
         /// </summary>
-        /// <returns>retorna un trabajo actualizado</returns>
+        /// <returns>retorna un trabajo actualizado o un status code 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{codTrabajo}")]
