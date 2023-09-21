@@ -17,6 +17,13 @@ namespace ApiTechOil.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
+        /// <summary>
+        ///  Devuelve todos los Roles
+        /// </summary>
+        /// <returns>retorna un statusCode 200 todos los Roles</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,8 +31,14 @@ namespace ApiTechOil.Controllers
 
             return ResponseFactory.CreateSuccessResponse(200, PerfilUsuario);
         }
+
+        /// <summary>
+        ///  Devuelve un Rol
+        /// </summary>
+        /// <returns>retorna un statusCode 200 un Rol</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetById(int id)
         {
             var perfilUsuario = await _unitOfWork.PerfilUsuarioRepository.GetById(id);

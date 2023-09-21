@@ -18,6 +18,12 @@ namespace ApiTechOil.Controllers
             _unitOfWork = unitOfWork;
             _tokenJwtHelper = new TokenJwtHelper(configuration);
         }
+
+        /// <summary>
+        ///  Se loguea el usuario
+        /// </summary>
+        /// <returns>el token del usuario</returns>
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(AuthenticateDto dto)

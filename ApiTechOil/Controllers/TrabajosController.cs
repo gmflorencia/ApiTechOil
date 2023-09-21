@@ -18,8 +18,13 @@ namespace ApiTechOil.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        ///  Devuelve todo los trabajos
+        /// </summary>
+        /// <returns>retorna un statusCode 200 todos los trabajos</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var trabajos = await _unitOfWork.TrabajosRepository.GetAll();
@@ -27,8 +32,13 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, trabajos);
         }
 
+        /// <summary>
+        ///  Devuelve un trabajo
+        /// </summary>
+        /// <returns>retorna un statusCode 200 trabajo</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codTrabajo}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetTrabajoById(int codTrabajo)
         {
             var trabajo = await _unitOfWork.TrabajosRepository.GetById(codTrabajo);
@@ -39,6 +49,11 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, trabajo);
         }
 
+        /// <summary>
+        ///  Registra un nuevo trabajo
+        /// </summary>
+        /// <returns>retorna un trabajo registrado con un statosCode 201</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
@@ -48,6 +63,11 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Trabajo registrado con exito!");
         }
+
+        /// <summary>
+        ///  Devuelve un trabajo 
+        /// </summary>
+        /// <returns>retorna un trabajo actualizado o un status code 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{codTrabajo}")]
@@ -64,6 +84,11 @@ namespace ApiTechOil.Controllers
                 return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
             }
         }
+
+        /// <summary>
+        ///  Elimina un trabajo
+        /// </summary>
+        /// <returns> retorna trabajo eliminado o un 500</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{codTrabajo}")]

@@ -20,8 +20,13 @@ namespace ApiTechOil.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        ///  Devuelve todo los Usuarios
+        /// </summary>
+        /// <returns>retorna un statusCode 200 todos los Usuarios</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
@@ -29,17 +34,27 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, usuarios);
         }
 
+        /// <summary>
+        ///  Devuelve un Usuario
+        /// </summary>
+        /// <returns>retorna un statusCode 200 Usuario</returns>
+
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codUsuario}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetUsuarioById(int codUsuario)
         {
             var usuario = await _unitOfWork.UsuarioRepository.GetById(codUsuario);
             if (usuario == null)
             {
-                return ResponseFactory.CreateSuccessResponse(404, "Usuario NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Usuario NO encontrado!"); 
             }
             return ResponseFactory.CreateSuccessResponse(200, usuario);
         }
+
+        /// <summary>
+        ///  Registra un nuevo Usuario
+        /// </summary>
+        /// <returns>retorna Usuario registrado con un statusCode 200</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPost]
@@ -50,6 +65,11 @@ namespace ApiTechOil.Controllers
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Usuario registrado con exito!");
         }
+
+        /// <summary>
+        ///  Actualiza un Usuario
+        /// </summary>
+        /// <returns>retorna un Usuario actualizado o un statusCode 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{CodUsuario}")]
@@ -68,9 +88,10 @@ namespace ApiTechOil.Controllers
         }
 
         /// <summary>
-        ///  Elimina el usuario
+        ///  Elimina un Usuario
         /// </summary>
-        /// <returns>Eliminado o un 500</returns>
+        /// <returns> retorna Usuario eliminado o un 500</returns>
+        
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{codUsuario}")]
         public async Task<IActionResult> Delete([FromRoute] int codUsuario)
