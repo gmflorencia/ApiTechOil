@@ -10,13 +10,13 @@ using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Controllers
 {
-    [Route("api/Usuario")]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class UsuarioControllers : ControllerBase
+    public class UsuarioController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UsuarioControllers(IUnitOfWork unitOfWork)
+        public UsuarioController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -68,7 +68,7 @@ namespace ApiTechOil.Controllers
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Rergister")]
-        public async Task<IActionResult> Register(RegisterDto dto)
+        public async Task<IActionResult> Register(UsuarioDto dto)
         {
             await _unitOfWork.UsuarioRepository.Insert(new Usuario(dto));
             await _unitOfWork.Complete();
@@ -82,7 +82,7 @@ namespace ApiTechOil.Controllers
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{CodUsuario}")]
-        public async Task<IActionResult>Update([FromRoute] int CodUsuario, RegisterDto dto)
+        public async Task<IActionResult>Update([FromRoute] int CodUsuario, UsuarioDto dto)
         {
             var result = await _unitOfWork.UsuarioRepository.Update(new Usuario(dto,CodUsuario));
             if (!result)
@@ -116,7 +116,7 @@ namespace ApiTechOil.Controllers
                 Dni = usuario.Dni,
                 Email = usuario.Email,
                 Clave = usuario.Clave,
-                PerfilUsuario = usuario.PerfilUsuario,
+                CodRol = usuario.CodRol,
                 Activo = false
             });
             if (!result)

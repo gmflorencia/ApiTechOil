@@ -10,13 +10,13 @@ using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Controllers
 {
-    [Route("api/Servicios")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ServiciosController : Controller
+    public class ServicioController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ServiciosController(IUnitOfWork unitOfWork)
+        public ServicioController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -26,11 +26,11 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Servicios</returns>
 
-        [Authorize(Policy = "AdministradorConsultor")]
+       // [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var servicios = await _unitOfWork.ServiciosRepository.GetAll();
+            var servicios = await _unitOfWork.ServicioRepository.GetAll();
             int pageToShow = 1;
             if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
             var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
@@ -45,12 +45,12 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Servicios activos</returns>
 
-        [Authorize(Policy = "AdministradorConsultor")]
+       // [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("estado/{estado}")]
         public async Task<IActionResult> GetByEstado(bool estado)
         {
-            var servicios = await _unitOfWork.ServiciosRepository.GetByEstado(estado);
+            var servicios = await _unitOfWork.ServicioRepository.GetByEstado(estado);
             if (!servicios.Any())
             {
                 return ResponseFactory.CreateSuccessResponse(404, "NO existen servicios en esta condición " + estado);
@@ -63,11 +63,11 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 un Servicio</returns>
 
-        [Authorize(Policy = "AdministradorConsultor")]
+       // [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codServicio}")]
         public async Task<IActionResult> GetServicioById(int codServicio)
         {
-            var servicio = await _unitOfWork.ServiciosRepository.GetById(codServicio);
+            var servicio = await _unitOfWork.ServicioRepository.GetById(codServicio);
             if (servicio == null)
             {
                 return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); 
@@ -83,9 +83,9 @@ namespace ApiTechOil.Controllers
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register(ServiciosDto dto)
+        public async Task<IActionResult> Register(ServicioDto dto)
         {
-            await _unitOfWork.ServiciosRepository.Insert(new Servicios(dto));
+            await _unitOfWork.ServicioRepository.Insert(new Servicio(dto));
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Servicio registrado con exito!");
         }
@@ -97,9 +97,9 @@ namespace ApiTechOil.Controllers
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{codServicio}")]
-        public async Task<IActionResult> Update([FromRoute] int codServicio, ServiciosDto dto)
+        public async Task<IActionResult> Update([FromRoute] int codServicio, ServicioDto dto)
         {
-            var result = await _unitOfWork.ServiciosRepository.Update(new Servicios(dto, codServicio));
+            var result = await _unitOfWork.ServicioRepository.Update(new Servicio(dto, codServicio));
             if (!result)
             {
                 return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el servicio");
@@ -120,14 +120,14 @@ namespace ApiTechOil.Controllers
         [HttpDelete("{codServicio}")]
         public async Task<IActionResult> Delete([FromRoute] int codServicio)
         {
-            Servicios servicio = await _unitOfWork.ServiciosRepository.GetById(codServicio);
+            Servicio servicio = await _unitOfWork.ServicioRepository.GetById(codServicio);
             if (servicio == null)
             {
                 return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); 
             }
             return ResponseFactory.CreateSuccessResponse(200, servicio);
 
-            var result = await _unitOfWork.ServiciosRepository.Update(new Servicios
+            var result = await _unitOfWork.ServicioRepository.Update(new Servicio
             {
                 CodServicio = codServicio,
                 Descr = servicio.Descr,
