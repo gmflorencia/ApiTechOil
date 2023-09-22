@@ -17,7 +17,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodUsuario = 1,
                         Nombre = "Martin Cabrera",
                         Dni = 31467581,
-                        PerfilUsuario = 1,
+                        CodRol = 1,
                         Email = "martin@gmail.com",
                         Clave = ClaveEncryptHelper.EncryptClave("1234", "martin@gmail.com"),
                         Activo = true
@@ -28,7 +28,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodUsuario = 2,
                         Nombre = "Florencia Gonzalez",
                         Dni = 37053098,
-                        PerfilUsuario = 2,
+                        CodRol = 2,
                         Email = "florencia@gmail.com",
                         Clave = ClaveEncryptHelper.EncryptClave("5678", "florencia@gmail.com"),
                         Activo = true
@@ -38,14 +38,14 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         CodUsuario = 3,
                         Nombre = "Salome Cabrera",
                         Dni = 58706438,
-                        PerfilUsuario = 1,
+                        CodRol = 1,
                         Email = "salome@gmail.com",
                         Clave = ClaveEncryptHelper.EncryptClave("5792", "salome@gmail.com"),
                         Activo = true
 
                     });
-            modelBuilder.Entity<Proyectos>().HasData(
-                    new Proyectos
+            modelBuilder.Entity<Proyecto>().HasData(
+                    new Proyecto
                     {
                         CodProyecto = 1,
                         Nombre = "Proyecto 001",
@@ -54,7 +54,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Activo = true
 
                     },
-                    new Proyectos
+                    new Proyecto
                     {
                         CodProyecto = 2,
                         Nombre = "Proyecto 002",
@@ -62,7 +62,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Estado = 1,
                         Activo = true
                     },
-                    new Proyectos
+                    new Proyecto
                     {
                         CodProyecto = 3,
                         Nombre = "Proyecto 003",
@@ -70,30 +70,30 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Estado = 2,
                         Activo = true
                     });
-            modelBuilder.Entity<Servicios>().HasData(
-                    new Servicios
+            modelBuilder.Entity<Servicio>().HasData(
+                    new Servicio
                     {
                         CodServicio = 1,
                         Descr = "Servicio 001",
                         Estado = true,
                         ValorHora = 0.25,
                     },
-                    new Servicios
+                    new Servicio
                     {
                         CodServicio = 2,
                         Descr = "Servicio 002",
                         Estado = false,
                         ValorHora = 0.25,
                     },
-                    new Servicios
+                    new Servicio
                     {
                         CodServicio = 3,
                         Descr = "Servicio 003",
                         Estado = true,
                         ValorHora = 0.25,
                     });
-            modelBuilder.Entity<Trabajos>().HasData(
-                    new Trabajos
+            modelBuilder.Entity<Trabajo>().HasData(
+                    new Trabajo
                     {
                         CodTrabajo = 1,
                         Fecha = DateTime.Now,
@@ -104,7 +104,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Costo = 150.000,
                         Activo = true
                     },
-                    new Trabajos
+                    new Trabajo
                     {
                         CodTrabajo = 2,
                         Fecha = DateTime.Now,
@@ -116,7 +116,7 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Activo = true
 
                     },
-                    new Trabajos
+                    new Trabajo
                     {
                         CodTrabajo = 3,
                         Fecha = DateTime.Now,
@@ -128,16 +128,16 @@ namespace ApiTechOil.DataAccess.DataBaseSeeding
                         Activo = true
 
                     });
-            modelBuilder.Entity<PerfilUsuario>().HasData(
-                new PerfilUsuario
+            modelBuilder.Entity<Rol>().HasData(
+                new Rol
                 {
-                    Id = 1,
+                    CodRol = 1,
                     Descripcion = "Administrador",
                     Activo = true,
                 },
-                new PerfilUsuario
+                new Rol
                 {
-                    Id = 2,
+                    CodRol = 2,
                     Descripcion = "Consultor",
                     Activo = true,
                 });

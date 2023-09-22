@@ -10,10 +10,10 @@ namespace ApiTechOil.DataAccess
         {
         }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Proyectos> Proyectos { get; set; }
-        public DbSet<Servicios> Servicios { get; set; }
-        public DbSet<Trabajos> Trabajos { get; set; }
-        public DbSet<PerfilUsuario> PerfilUsuarios { get; set; }
+        public DbSet<Proyecto> Proyectos { get; set; }
+        public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<Trabajo> Trabajos { get; set; }
+        public DbSet<Rol> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             var seeders = new List<IEntitySeeder>
