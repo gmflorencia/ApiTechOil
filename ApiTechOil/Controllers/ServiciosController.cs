@@ -6,6 +6,7 @@ using ApiTechOil.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using ApiTechOil.Infraestructure;
+using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Controllers
 {
@@ -30,8 +31,13 @@ namespace ApiTechOil.Controllers
         public async Task<IActionResult> GetAll()
         {
             var servicios = await _unitOfWork.ServiciosRepository.GetAll();
+            int pageToShow = 1;
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+            var paginadoServicios = PaginateHelper.Paginate(servicios, pageToShow, url);
 
-            return ResponseFactory.CreateSuccessResponse(200, servicios);
+            return ResponseFactory.CreateSuccessResponse(200, paginadoServicios);
+
         }
 
         /// <summary>

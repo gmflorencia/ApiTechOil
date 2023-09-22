@@ -4,6 +4,7 @@ using ApiTechOil.Entities;
 using ApiTechOil.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using ApiTechOil.Infraestructure;
+using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Controllers
 {
@@ -23,13 +24,18 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Proyectos</returns>
 
-        [Authorize(Policy = "AdministradorConsultor")]
+      //  [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var proyectos = await _unitOfWork.ProyectosRepository.GetAll();
 
-            return ResponseFactory.CreateSuccessResponse(200, proyectos);
+            int pageToShow = 1;
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+            var paginadoProyectos = PaginateHelper.Paginate(proyectos, pageToShow, url);
+
+            return ResponseFactory.CreateSuccessResponse(200, paginadoProyectos);
         }
 
         /// <summary>
