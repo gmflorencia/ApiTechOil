@@ -1,6 +1,6 @@
 ﻿namespace ApiTechOil.DTOs
 {
-    public class PerfilUsuarioDto
+    public class RolDto
     {
         public string Descripcion { get; set; }
     }

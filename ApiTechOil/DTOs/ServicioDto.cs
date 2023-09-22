@@ -1,6 +1,6 @@
 ﻿namespace ApiTechOil.DTOs
 {
-    public class ServiciosDto
+    public class ServicioDto
     {
         public string Descr { get; set; }
         public bool Estado { get; set; }

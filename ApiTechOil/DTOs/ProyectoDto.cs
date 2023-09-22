@@ -1,6 +1,6 @@
 ﻿namespace ApiTechOil.DTOs
 {
-    public class ProyectosDto
+    public class ProyectoDto
     {
         public string Nombre { get; set; }
         public string Direccion { get; set; }
