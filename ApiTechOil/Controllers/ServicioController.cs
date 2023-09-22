@@ -26,7 +26,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Servicios</returns>
 
-       // [Authorize(Policy = "AdministradorConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -45,7 +45,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Servicios activos</returns>
 
-       // [Authorize(Policy = "AdministradorConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("estado/{estado}")]
         public async Task<IActionResult> GetByEstado(bool estado)
@@ -63,7 +63,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 un Servicio</returns>
 
-       // [Authorize(Policy = "AdministradorConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codServicio}")]
         public async Task<IActionResult> GetServicioById(int codServicio)
         {

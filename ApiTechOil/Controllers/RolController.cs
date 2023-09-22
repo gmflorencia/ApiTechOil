@@ -49,6 +49,11 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(200, rol);
         }
 
+        /// <summary>
+        ///  Registra un nuevo Rol
+        /// </summary>
+        /// <returns>retorna un Rol registrado con un statusCode 200</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("rol")]
@@ -61,6 +66,11 @@ namespace ApiTechOil.Controllers
             return ResponseFactory.CreateSuccessResponse(201, "Perfil registrado con exito!");
 
         }
+
+        /// <summary>
+        ///  Actualiza un Rol
+        /// </summary>
+        /// <returns>retorna un Rol actualizado o un statusCode 201</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{id}")]
@@ -79,6 +89,11 @@ namespace ApiTechOil.Controllers
             }
         }
 
+        /// <summary>
+        ///  Elimina un Rol
+        /// </summary>
+        /// <returns> retorna Rol eliminado o un 500</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
@@ -86,7 +101,7 @@ namespace ApiTechOil.Controllers
             Rol rol = await _unitOfWork.RolRepository.GetById(id);
             if (rol == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el usuario no se encuentra.
+                return NotFound(); 
             }
             var result = await _unitOfWork.RolRepository.Update(new Rol
             {

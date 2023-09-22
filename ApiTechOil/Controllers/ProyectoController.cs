@@ -23,7 +23,8 @@ namespace ApiTechOil.Controllers
         ///  Devuelve todos los Proyectos
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Proyectos</returns>
-//[Authorize(Policy = "AdminConsultor")]
+        
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -42,7 +43,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 un Proyecto</returns>
 
-        //[Authorize(Policy = "AdminConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codProyecto}")]
         public async Task<IActionResult> GetProyectoById(int codProyecto)
         {
@@ -59,7 +60,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 Proyectos por estado ingresado</returns>
 
-        //[Authorize(Policy = "AdminConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("/api/Proyecto/estado/{estado}")]
         public async Task<IActionResult> GetByEstado(int estado)

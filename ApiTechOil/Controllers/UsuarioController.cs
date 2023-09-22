@@ -12,7 +12,7 @@ namespace ApiTechOil.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class UsuarioController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -48,7 +48,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 Usuario</returns>
 
-       // [Authorize(Policy = "AdministradorConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codUsuario}")]
         public async Task<IActionResult> GetUsuarioById(int codUsuario)
         {
