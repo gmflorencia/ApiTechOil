@@ -4,11 +4,11 @@ using ApiTechOil.DataAccess.Repositories.Interfaces;
 
 namespace ApiTechOil.DataAccess.Repositories
 {
-    public class TrabajosRepository : Repository<Trabajos> , ITrabajosRepository 
+    public class TrabajoRepository : Repository<Trabajo> , ITrabajoRepository 
     {
 
-        public TrabajosRepository(AppDbContext context) : base(context) { }
-        public override async Task<bool> Update(Trabajos updateTrabajo)
+        public TrabajoRepository(AppDbContext context) : base(context) { }
+        public override async Task<bool> Update(Trabajo updateTrabajo)
         {
             var trabajo = await _context.Trabajos.FirstOrDefaultAsync(x=> x.CodTrabajo == updateTrabajo.CodTrabajo);
             if (trabajo == null) { return false; }
