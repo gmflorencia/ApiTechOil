@@ -22,44 +22,7 @@ namespace ApiTechOil.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ApiTechOil.Entities.PerfilUsuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .HasColumnType("bit")
-                        .HasColumnName("Activo");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR (100)")
-                        .HasColumnName("Descripcion");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PerfilUsuarios");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Activo = true,
-                            Descripcion = "Administrador"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Activo = true,
-                            Descripcion = "Consultor"
-                        });
-                });
-
-            modelBuilder.Entity("ApiTechOil.Entities.Proyectos", b =>
+            modelBuilder.Entity("ApiTechOil.Entities.Proyecto", b =>
                 {
                     b.Property<int>("CodProyecto")
                         .ValueGeneratedOnAdd()
@@ -117,7 +80,44 @@ namespace ApiTechOil.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ApiTechOil.Entities.Servicios", b =>
+            modelBuilder.Entity("ApiTechOil.Entities.Rol", b =>
+                {
+                    b.Property<int>("CodRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CodRol");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodRol"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Activo");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR (100)")
+                        .HasColumnName("Descripcion");
+
+                    b.HasKey("CodRol");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            CodRol = 1,
+                            Activo = true,
+                            Descripcion = "Administrador"
+                        },
+                        new
+                        {
+                            CodRol = 2,
+                            Activo = true,
+                            Descripcion = "Consultor"
+                        });
+                });
+
+            modelBuilder.Entity("ApiTechOil.Entities.Servicio", b =>
                 {
                     b.Property<int>("CodServicio")
                         .ValueGeneratedOnAdd()
@@ -167,7 +167,7 @@ namespace ApiTechOil.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ApiTechOil.Entities.Trabajos", b =>
+            modelBuilder.Entity("ApiTechOil.Entities.Trabajo", b =>
                 {
                     b.Property<int>("CodTrabajo")
                         .ValueGeneratedOnAdd()
@@ -221,7 +221,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 1,
                             CodServicio = 2,
                             Costo = 150m,
-                            Fecha = new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3574),
+                            Fecha = new DateTime(2023, 9, 22, 1, 38, 42, 171, DateTimeKind.Local).AddTicks(7062),
                             ValorHora = 0.25m
                         },
                         new
@@ -232,7 +232,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 2,
                             CodServicio = 3,
                             Costo = 180m,
-                            Fecha = new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3587),
+                            Fecha = new DateTime(2023, 9, 22, 1, 38, 42, 171, DateTimeKind.Local).AddTicks(7078),
                             ValorHora = 0.25m
                         },
                         new
@@ -243,7 +243,7 @@ namespace ApiTechOil.Migrations
                             CodProyecto = 3,
                             CodServicio = 3,
                             Costo = 190m,
-                            Fecha = new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3588),
+                            Fecha = new DateTime(2023, 9, 22, 1, 38, 42, 171, DateTimeKind.Local).AddTicks(7080),
                             ValorHora = 0.25m
                         });
                 });
@@ -266,6 +266,10 @@ namespace ApiTechOil.Migrations
                         .HasColumnType("VARCHAR (100)")
                         .HasColumnName("CLave");
 
+                    b.Property<int>("CodRol")
+                        .HasColumnType("int")
+                        .HasColumnName("CodRol");
+
                     b.Property<int>("Dni")
                         .HasColumnType("int")
                         .HasColumnName("Dni");
@@ -280,13 +284,9 @@ namespace ApiTechOil.Migrations
                         .HasColumnType("VARCHAR (100)")
                         .HasColumnName("Nombre");
 
-                    b.Property<int>("PerfilUsuario")
-                        .HasColumnType("int")
-                        .HasColumnName("PerfilUsuario");
-
                     b.HasKey("CodUsuario");
 
-                    b.HasIndex("PerfilUsuario");
+                    b.HasIndex("CodRol");
 
                     b.ToTable("Usuarios");
 
@@ -296,42 +296,42 @@ namespace ApiTechOil.Migrations
                             CodUsuario = 1,
                             Activo = true,
                             Clave = "665117e5124b9ff0cc0d4e8d408fdc2c8b9d026d070ccbdd84a0ce8da6285061",
+                            CodRol = 1,
                             Dni = 31467581,
                             Email = "martin@gmail.com",
-                            Nombre = "Martin Cabrera",
-                            PerfilUsuario = 1
+                            Nombre = "Martin Cabrera"
                         },
                         new
                         {
                             CodUsuario = 2,
                             Activo = true,
                             Clave = "9d3846caf71f436b90f7ea82a220d742aecc3134c5e41fa97f8ada2d87800c87",
+                            CodRol = 2,
                             Dni = 37053098,
                             Email = "florencia@gmail.com",
-                            Nombre = "Florencia Gonzalez",
-                            PerfilUsuario = 2
+                            Nombre = "Florencia Gonzalez"
                         },
                         new
                         {
                             CodUsuario = 3,
                             Activo = true,
                             Clave = "596f1c58d2fdc24d238dfbd538852855c03c74e1d2c394cb218fec9de06b5982",
+                            CodRol = 1,
                             Dni = 58706438,
                             Email = "salome@gmail.com",
-                            Nombre = "Salome Cabrera",
-                            PerfilUsuario = 1
+                            Nombre = "Salome Cabrera"
                         });
                 });
 
-            modelBuilder.Entity("ApiTechOil.Entities.Trabajos", b =>
+            modelBuilder.Entity("ApiTechOil.Entities.Trabajo", b =>
                 {
-                    b.HasOne("ApiTechOil.Entities.Proyectos", "Proyectos")
+                    b.HasOne("ApiTechOil.Entities.Proyecto", "Proyectos")
                         .WithMany()
                         .HasForeignKey("CodProyecto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApiTechOil.Entities.Servicios", "Servicios")
+                    b.HasOne("ApiTechOil.Entities.Servicio", "Servicios")
                         .WithMany()
                         .HasForeignKey("CodServicio")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -344,13 +344,13 @@ namespace ApiTechOil.Migrations
 
             modelBuilder.Entity("ApiTechOil.Entities.Usuario", b =>
                 {
-                    b.HasOne("ApiTechOil.Entities.PerfilUsuario", "Id")
+                    b.HasOne("ApiTechOil.Entities.Rol", "Roles")
                         .WithMany()
-                        .HasForeignKey("PerfilUsuario")
+                        .HasForeignKey("CodRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Id");
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

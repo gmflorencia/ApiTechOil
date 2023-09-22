@@ -14,20 +14,6 @@ namespace ApiTechOil.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PerfilUsuarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripcion = table.Column<string>(type: "VARCHAR (100)", nullable: false),
-                    Activo = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PerfilUsuarios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Proyectos",
                 columns: table => new
                 {
@@ -41,6 +27,20 @@ namespace ApiTechOil.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Proyectos", x => x.CodProyecto);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    CodRol = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion = table.Column<string>(type: "VARCHAR (100)", nullable: false),
+                    Activo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.CodRol);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,7 +66,7 @@ namespace ApiTechOil.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "VARCHAR (100)", nullable: false),
                     Dni = table.Column<int>(type: "int", nullable: false),
-                    PerfilUsuario = table.Column<int>(type: "int", nullable: false),
+                    CodRol = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "VARCHAR (100)", nullable: false),
                     CLave = table.Column<string>(type: "VARCHAR (100)", nullable: false),
                     Activo = table.Column<bool>(type: "bit", nullable: false)
@@ -75,10 +75,10 @@ namespace ApiTechOil.Migrations
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.CodUsuario);
                     table.ForeignKey(
-                        name: "FK_Usuarios_PerfilUsuarios_PerfilUsuario",
-                        column: x => x.PerfilUsuario,
-                        principalTable: "PerfilUsuarios",
-                        principalColumn: "Id",
+                        name: "FK_Usuarios_Roles_CodRol",
+                        column: x => x.CodRol,
+                        principalTable: "Roles",
+                        principalColumn: "CodRol",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -114,15 +114,6 @@ namespace ApiTechOil.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "PerfilUsuarios",
-                columns: new[] { "Id", "Activo", "Descripcion" },
-                values: new object[,]
-                {
-                    { 1, true, "Administrador" },
-                    { 2, true, "Consultor" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Proyectos",
                 columns: new[] { "CodProyecto", "Activo", "Direccion", "Estado", "Nombre" },
                 values: new object[,]
@@ -130,6 +121,15 @@ namespace ApiTechOil.Migrations
                     { 1, true, "Sanchez 33, Glew", 2, "Proyecto 001" },
                     { 2, true, "Santa fe 342, Lomas de Zamora", 1, "Proyecto 002" },
                     { 3, true, " Lavalle 1674, CABA", 2, "Proyecto 003" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "CodRol", "Activo", "Descripcion" },
+                values: new object[,]
+                {
+                    { 1, true, "Administrador" },
+                    { 2, true, "Consultor" }
                 });
 
             migrationBuilder.InsertData(
@@ -147,19 +147,19 @@ namespace ApiTechOil.Migrations
                 columns: new[] { "CodTrabajo", "Activo", "CantHoras", "CodProyecto", "CodServicio", "Costo", "Fecha", "ValorHora" },
                 values: new object[,]
                 {
-                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3574), 0.25m },
-                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3587), 0.25m },
-                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 17, 21, 1, 20, 609, DateTimeKind.Local).AddTicks(3588), 0.25m }
+                    { 1, true, 28, 1, 2, 150m, new DateTime(2023, 9, 22, 1, 38, 42, 171, DateTimeKind.Local).AddTicks(7062), 0.25m },
+                    { 2, true, 28, 2, 3, 180m, new DateTime(2023, 9, 22, 1, 38, 42, 171, DateTimeKind.Local).AddTicks(7078), 0.25m },
+                    { 3, true, 28, 3, 3, 190m, new DateTime(2023, 9, 22, 1, 38, 42, 171, DateTimeKind.Local).AddTicks(7080), 0.25m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
-                columns: new[] { "CodUsuario", "Activo", "CLave", "Dni", "Email", "Nombre", "PerfilUsuario" },
+                columns: new[] { "CodUsuario", "Activo", "CLave", "CodRol", "Dni", "Email", "Nombre" },
                 values: new object[,]
                 {
-                    { 1, true, "665117e5124b9ff0cc0d4e8d408fdc2c8b9d026d070ccbdd84a0ce8da6285061", 31467581, "martin@gmail.com", "Martin Cabrera", 1 },
-                    { 2, true, "9d3846caf71f436b90f7ea82a220d742aecc3134c5e41fa97f8ada2d87800c87", 37053098, "florencia@gmail.com", "Florencia Gonzalez", 2 },
-                    { 3, true, "596f1c58d2fdc24d238dfbd538852855c03c74e1d2c394cb218fec9de06b5982", 58706438, "salome@gmail.com", "Salome Cabrera", 1 }
+                    { 1, true, "665117e5124b9ff0cc0d4e8d408fdc2c8b9d026d070ccbdd84a0ce8da6285061", 1, 31467581, "martin@gmail.com", "Martin Cabrera" },
+                    { 2, true, "9d3846caf71f436b90f7ea82a220d742aecc3134c5e41fa97f8ada2d87800c87", 2, 37053098, "florencia@gmail.com", "Florencia Gonzalez" },
+                    { 3, true, "596f1c58d2fdc24d238dfbd538852855c03c74e1d2c394cb218fec9de06b5982", 1, 58706438, "salome@gmail.com", "Salome Cabrera" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -173,9 +173,9 @@ namespace ApiTechOil.Migrations
                 column: "CodServicio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_PerfilUsuario",
+                name: "IX_Usuarios_CodRol",
                 table: "Usuarios",
-                column: "PerfilUsuario");
+                column: "CodRol");
         }
 
         /// <inheritdoc />
@@ -194,7 +194,7 @@ namespace ApiTechOil.Migrations
                 name: "Servicios");
 
             migrationBuilder.DropTable(
-                name: "PerfilUsuarios");
+                name: "Roles");
         }
     }
 }
