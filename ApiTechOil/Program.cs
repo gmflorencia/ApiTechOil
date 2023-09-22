@@ -65,11 +65,10 @@ namespace ApiTechOil
                 {
                     policy.RequireClaim(ClaimTypes.Role, "1");
                 });
-                option.AddPolicy("Administrador, Consultor", policy =>
+                option.AddPolicy("AdministradorConsultor", policy =>
 
                 {
-                    policy.RequireClaim(ClaimTypes.Role, "1");
-                    policy.RequireClaim(ClaimTypes.Role, "2");
+                    policy.RequireClaim(ClaimTypes.Role, "1", "2");
 
                 });
             });

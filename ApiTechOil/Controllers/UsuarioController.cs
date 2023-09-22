@@ -26,7 +26,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Usuarios</returns>
 
-        //[Authorize(Policy = "AdministradorConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
