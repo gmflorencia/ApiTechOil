@@ -6,12 +6,13 @@ using ApiTechOil.Services;
 using Microsoft.AspNetCore.Authorization;
 using ApiTechOil.DTOs;
 using ApiTechOil.Infraestructure;
+using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Controllers
 {
     [Route("api/Usuario")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UsuarioControllers : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,13 +26,21 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los Usuarios</returns>
 
-        [Authorize(Policy = "AdministradorConsultor")]
+        //[Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
+            int pageToShow = 1;
 
-            return ResponseFactory.CreateSuccessResponse(200, usuarios);
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+
+            var paginadoUsuarios = PaginateHelper.Paginate(usuarios, pageToShow, url);
+
+            return ResponseFactory.CreateSuccessResponse(200, paginadoUsuarios);
+
         }
 
         /// <summary>
@@ -39,7 +48,7 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 Usuario</returns>
 
-        [Authorize(Policy = "AdministradorConsultor")]
+       // [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet("{codUsuario}")]
         public async Task<IActionResult> GetUsuarioById(int codUsuario)
         {

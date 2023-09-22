@@ -48,6 +48,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAuthorization(option =>
 {
     option.AddPolicy("Administrador", policy => policy.RequireClaim(ClaimTypes.Role, "1"));
+    option.AddPolicy("AdministradorConsultor", policy =>
+
+    {
+        policy.RequireClaim(ClaimTypes.Role, "1");
+        policy.RequireClaim(ClaimTypes.Role, "2");
+
+    });
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
