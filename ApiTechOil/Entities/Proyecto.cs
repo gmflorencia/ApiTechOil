@@ -5,16 +5,16 @@ using System.Net;
 
 namespace ApiTechOil.Entities
 {
-    public class Proyectos
+    public class Proyecto
     {
-        public Proyectos(ProyectosDto proyectosDto)
+        public Proyecto(ProyectoDto proyectosDto)
         {
             Nombre = proyectosDto.Nombre;
             Direccion = proyectosDto.Direccion;
             Estado = proyectosDto.Estado;
             Activo = true;    
         }
-        public Proyectos(ProyectosDto dto, int codProyecto)
+        public Proyecto(ProyectoDto dto, int codProyecto)
         {
             CodProyecto = codProyecto;
             Nombre = dto.Nombre;
@@ -22,7 +22,7 @@ namespace ApiTechOil.Entities
             Estado = dto.Estado;
             Activo = true;
         }
-        public Proyectos()
+        public Proyecto()
         {
 
         }
