@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>C:\REPOSITORIO\ApiTechOil\ApiTechOil\bin\Debug\net6.0\ApiTechOil.xml</DocumentationFile>
+    <DocumentationFile>C:\Repositorio\ApiTechOil\ApiTechOil\bin\Debug\net6.0\ApiTechOil.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
