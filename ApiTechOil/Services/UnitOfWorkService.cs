@@ -6,20 +6,20 @@ namespace ApiTechOil.Services
     public class UnitOfWorkService : IUnitOfWork
     {
         private readonly AppDbContext _context;
-        public ProyectosRepository ProyectosRepository { get; set; }
-        public ServiciosRepository ServiciosRepository { get; set; }
-        public TrabajosRepository TrabajosRepository { get; set; }
-        public PerfilUsuarioRepository PerfilUsuarioRepository { get; }
+        public ProyectoRepository ProyectoRepository { get; set; }
+        public ServicioRepository ServicioRepository { get; set; }
+        public TrabajoRepository TrabajoRepository { get; set; }
+        public RolRepository RolRepository { get; }
         public UsuarioRepository UsuarioRepository { get; set; }
 
         public UnitOfWorkService(AppDbContext context)
         {
             _context = context;
             UsuarioRepository = new UsuarioRepository(_context);
-            ProyectosRepository = new ProyectosRepository(_context);
-            ServiciosRepository = new ServiciosRepository(_context);
-            TrabajosRepository = new TrabajosRepository(_context);  
-            PerfilUsuarioRepository = new PerfilUsuarioRepository(_context);
+            ProyectoRepository = new ProyectoRepository(_context);
+            ServicioRepository = new ServicioRepository(_context);
+            TrabajoRepository = new TrabajoRepository(_context);  
+            RolRepository = new RolRepository(_context);
         }
         public Task<int> Complete()
         {

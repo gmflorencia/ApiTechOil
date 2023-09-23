@@ -8,13 +8,13 @@ using ApiTechOil.Helpers;
 
 namespace ApiTechOil.Controllers
 {
-    [Route("api/Trabajos")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class TrabajosController : Controller
+    public class TrabajoController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public TrabajosController(IUnitOfWork unitOfWork)
+        public TrabajoController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -24,11 +24,11 @@ namespace ApiTechOil.Controllers
         /// </summary>
         /// <returns>retorna un statusCode 200 todos los trabajos</returns>
 
-       // [Authorize(Policy = "AdministradorConsultor")]
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var trabajos = await _unitOfWork.TrabajosRepository.GetAll();
+            var trabajos = await _unitOfWork.TrabajoRepository.GetAll();
             int pageToShow = 1;
             if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
             var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
@@ -46,7 +46,7 @@ namespace ApiTechOil.Controllers
         [HttpGet("{codTrabajo}")]
         public async Task<IActionResult> GetTrabajoById(int codTrabajo)
         {
-            var trabajo = await _unitOfWork.TrabajosRepository.GetById(codTrabajo);
+            var trabajo = await _unitOfWork.TrabajoRepository.GetById(codTrabajo);
             if (trabajo == null)
             {
                 return ResponseFactory.CreateSuccessResponse(404, "Trabajo NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
@@ -62,9 +62,9 @@ namespace ApiTechOil.Controllers
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register(TrabajosDto dto)
+        public async Task<IActionResult> Register(TrabajoDto dto)
         {
-            await _unitOfWork.TrabajosRepository.Insert(new Trabajos(dto));
+            await _unitOfWork.TrabajoRepository.Insert(new Trabajo(dto));
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Trabajo registrado con exito!");
         }
@@ -76,9 +76,9 @@ namespace ApiTechOil.Controllers
 
         [Authorize(Policy = "Administrador")]
         [HttpPut("{codTrabajo}")]
-        public async Task<IActionResult> Update([FromRoute] int codTrabajo, TrabajosDto dto)
+        public async Task<IActionResult> Update([FromRoute] int codTrabajo, TrabajoDto dto)
         {
-            var result = await _unitOfWork.TrabajosRepository.Update(new Trabajos(dto, codTrabajo));
+            var result = await _unitOfWork.TrabajoRepository.Update(new Trabajo(dto, codTrabajo));
             if (!result)
             {
                 return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el trabajo");
@@ -99,15 +99,17 @@ namespace ApiTechOil.Controllers
         [HttpDelete("{codTrabajo}")]
         public async Task<IActionResult> Delete([FromRoute] int codTrabajo)
         {
-            Trabajos trabajos = await _unitOfWork.TrabajosRepository.GetById(codTrabajo);
+            Trabajo trabajos = await _unitOfWork.TrabajoRepository.GetById(codTrabajo);
             if (trabajos == null)
             {
                 return ResponseFactory.CreateSuccessResponse(404, "Trabajo NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
             }
-            var result = await _unitOfWork.TrabajosRepository.Update(new Trabajos
+            var result = await _unitOfWork.TrabajoRepository.Update(new Trabajo
             {
                 CodTrabajo = codTrabajo,
-                Fecha = trabajos.Fecha,
+                CodProyecto = trabajos.CodProyecto,
+                CodServicio = trabajos.CodServicio,
+                Fecha = DateTime.Now,
                 CantHoras=trabajos.CantHoras,
                 ValorHora = trabajos.ValorHora,
                 Costo=trabajos.Costo,

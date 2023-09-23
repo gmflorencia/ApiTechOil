@@ -5,27 +5,27 @@ using ApiTechOil.DTOs;
 
 namespace ApiTechOil.Entities
 {
-    public class PerfilUsuario
+    public class Rol
     {
-        public PerfilUsuario(PerfilUsuarioDto dto)
+        public Rol(RolDto dto)
         {
             Descripcion = dto.Descripcion;
             Activo = true;
         }
-        public PerfilUsuario(PerfilUsuarioDto dto, int id)
+        public Rol(RolDto dto, int id)
         {
-            Id = id;
+            CodRol = id;
             Descripcion = dto.Descripcion;
             Activo = true;
         }
-        public PerfilUsuario()
+        public Rol()
         {
 
         }
 
         [Key]
-        [Column("Id", TypeName = "int")]
-        public int Id { get; set; }
+        [Column("CodRol", TypeName = "int")]
+        public int CodRol { get; set; }
 
         [Required]
         [Column("Descripcion", TypeName = "VARCHAR (100)")]

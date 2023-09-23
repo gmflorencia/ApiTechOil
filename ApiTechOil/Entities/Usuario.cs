@@ -8,16 +8,16 @@ namespace ApiTechOil.Entities
 {
     public class Usuario
     {
-        public Usuario(RegisterDto registerDto)
+        public Usuario(UsuarioDto registerDto)
         {
             Nombre = registerDto.Nombre;
             Dni = registerDto.Dni;
             Email = registerDto.Email;
             Clave = ClaveEncryptHelper.EncryptClave(registerDto.Clave, registerDto.Email);
             Activo = true;
-            PerfilUsuario = 1;
+            CodRol = registerDto.CodRol;
         }
-        public Usuario(RegisterDto registerDto, int codUsuario)
+        public Usuario(UsuarioDto registerDto, int codUsuario)
         {
             CodUsuario = codUsuario;
             Nombre = registerDto.Nombre;
@@ -25,7 +25,7 @@ namespace ApiTechOil.Entities
             Email = registerDto.Email;
             Clave = ClaveEncryptHelper.EncryptClave(registerDto.Clave, registerDto.Email);
             Activo = true;
-            PerfilUsuario = 1;
+            CodRol = registerDto.CodRol;
         }
         public Usuario()
         {
@@ -45,11 +45,11 @@ namespace ApiTechOil.Entities
         public int Dni { get; set; }
 
         [Required]
-        [Column("PerfilUsuario")]
-        public int PerfilUsuario { get; set; }
+        [Column("CodRol")]
+        public int CodRol { get; set; }
 
-        [ForeignKey("PerfilUsuario")]
-        public PerfilUsuario Id { get; set; }
+        [ForeignKey("CodRol")]
+        public Rol Roles { get; set; }
 
         [Required]
         [Column("Email", TypeName = "VARCHAR (100)")]

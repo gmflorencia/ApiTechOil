@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiTechOil.Entities
 {
-    public class Trabajos
+    public class Trabajo
     {
-        public Trabajos(TrabajosDto trabajosDto)
+        public Trabajo(TrabajoDto trabajosDto)
         {
             Fecha= trabajosDto.Fecha;
             CodServicio= trabajosDto.CodServicio;
@@ -16,7 +16,7 @@ namespace ApiTechOil.Entities
             Costo= trabajosDto.Costo;
             Activo = true;
         }
-        public Trabajos(TrabajosDto dto, int codTrabajo)
+        public Trabajo(TrabajoDto dto, int codTrabajo)
         {
             CodTrabajo= codTrabajo;
             CodProyecto= dto.CodProyecto;
@@ -27,7 +27,7 @@ namespace ApiTechOil.Entities
             Costo = dto.Costo;
             Activo = true;
         }
-        public Trabajos()
+        public Trabajo()
         {
 
         }
@@ -45,14 +45,14 @@ namespace ApiTechOil.Entities
         public int CodProyecto { get; set; }
 
         [ForeignKey("CodProyecto")]
-        public Proyectos Proyectos { get; set; }
+        public Proyecto Proyectos { get; set; }
         
         [Required]
         [Column("CodServicio")]
         public int CodServicio { get; set; }
 
         [ForeignKey("CodServicio")]
-        public Servicios Servicios { get; set; }
+        public Servicio Servicios { get; set; }
         
         [Required]
         [Column ("CantHoras", TypeName = "int")]  

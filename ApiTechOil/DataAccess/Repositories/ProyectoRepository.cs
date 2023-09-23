@@ -6,11 +6,11 @@ using ApiTechOil.DTOs;
 
 namespace ApiTechOil.DataAccess.Repositories
 {
-    public class ProyectosRepository : Repository<Proyectos> , IProyectosRepository 
+    public class ProyectoRepository : Repository<Proyecto> , IProyectoRepository 
     {
 
-        public ProyectosRepository(AppDbContext context) : base(context) { }
-        public override async Task<bool> Update(Proyectos updateProyecto)
+        public ProyectoRepository(AppDbContext context) : base(context) { }
+        public override async Task<bool> Update(Proyecto updateProyecto)
         {
             var proyecto = await _context.Proyectos.FirstOrDefaultAsync(x=> x.CodProyecto == updateProyecto.CodProyecto);
             if (proyecto == null) { return false; }
@@ -31,7 +31,7 @@ namespace ApiTechOil.DataAccess.Repositories
             }
             return true;
         }
-        public virtual async Task<List<Proyectos>> GetByEstado(int estado)
+        public virtual async Task<List<Proyecto>> GetByEstado(int estado)
         {
             return await _context.Proyectos.Where(e => e.Estado == estado).ToListAsync();
         }

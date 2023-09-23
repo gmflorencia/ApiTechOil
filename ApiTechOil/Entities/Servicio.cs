@@ -5,23 +5,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiTechOil.Entities
 {
-    public class Servicios
+    public class Servicio
     {
-        public Servicios(ServiciosDto serviciosDto )
+        public Servicio(ServicioDto serviciosDto )
         {
             Descr = serviciosDto.Descr;
             Estado = true;
             ValorHora = serviciosDto.ValorHora;
             
         }
-        public Servicios(ServiciosDto dto, int codServicio)
+        public Servicio(ServicioDto dto, int codServicio)
         {
             CodServicio = codServicio;
             Descr= dto.Descr;
             Estado= true;
             ValorHora = dto.ValorHora;
         }
-        public Servicios()
+        public Servicio()
         {
 
         }

@@ -10,10 +10,10 @@ namespace ApiTechOil.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PerfilUsuarioController : ControllerBase
+    public class RolController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PerfilUsuarioController(IUnitOfWork unitOfWork)
+        public RolController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -27,9 +27,9 @@ namespace ApiTechOil.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var PerfilUsuario = await _unitOfWork.PerfilUsuarioRepository.GetAll();
+            var rol = await _unitOfWork.RolRepository.GetAll();
 
-            return ResponseFactory.CreateSuccessResponse(200, PerfilUsuario);
+            return ResponseFactory.CreateSuccessResponse(200, rol);
         }
 
         /// <summary>
@@ -41,32 +41,42 @@ namespace ApiTechOil.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var perfilUsuario = await _unitOfWork.PerfilUsuarioRepository.GetById(id);
-            if (perfilUsuario == null)
+            var rol = await _unitOfWork.RolRepository.GetById(id);
+            if (rol == null)
             {
                 return ResponseFactory.CreateSuccessResponse(404, "Perfil NO encontrado!");
             }
-            return ResponseFactory.CreateSuccessResponse(200, perfilUsuario);
+            return ResponseFactory.CreateSuccessResponse(200, rol);
         }
+
+        /// <summary>
+        ///  Registra un nuevo Rol
+        /// </summary>
+        /// <returns>retorna un Rol registrado con un statusCode 200</returns>
 
         [Authorize(Policy = "Administrador")]
         [HttpPost]
-        [Route("PerfilUsuario")]
-        public async Task<IActionResult> Insert(PerfilUsuarioDto dto)
+        [Route("rol")]
+        public async Task<IActionResult> Insert(RolDto dto)
         {
 
-            var perfilUsuario = new PerfilUsuario(dto);
-            await _unitOfWork.PerfilUsuarioRepository.Insert(perfilUsuario);
+            var rol = new Rol(dto);
+            await _unitOfWork.RolRepository.Insert(rol);
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Perfil registrado con exito!");
 
         }
 
+        /// <summary>
+        ///  Actualiza un Rol
+        /// </summary>
+        /// <returns>retorna un Rol actualizado o un statusCode 201</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, PerfilUsuarioDto dto)
+        public async Task<IActionResult> Update([FromRoute] int id, RolDto dto)
         {
-            var result = await _unitOfWork.PerfilUsuarioRepository.Update(new PerfilUsuario(dto, id));
+            var result = await _unitOfWork.RolRepository.Update(new Rol(dto, id));
 
             if (!result)
             {
@@ -79,19 +89,24 @@ namespace ApiTechOil.Controllers
             }
         }
 
+        /// <summary>
+        ///  Elimina un Rol
+        /// </summary>
+        /// <returns> retorna Rol eliminado o un 500</returns>
+
         [Authorize(Policy = "Administrador")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            PerfilUsuario perfilUsuario = await _unitOfWork.PerfilUsuarioRepository.GetById(id);
-            if (perfilUsuario == null)
+            Rol rol = await _unitOfWork.RolRepository.GetById(id);
+            if (rol == null)
             {
-                return NotFound(); // Devuelve un resultado NotFound si el usuario no se encuentra.
+                return NotFound(); 
             }
-            var result = await _unitOfWork.PerfilUsuarioRepository.Update(new PerfilUsuario
+            var result = await _unitOfWork.RolRepository.Update(new Rol
             {
-                Id = id,
-                Descripcion = perfilUsuario.Descripcion,
+                CodRol = id,
+                Descripcion = rol.Descripcion,
                 Activo = false
             });
             if (!result)

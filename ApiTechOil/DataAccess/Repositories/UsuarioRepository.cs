@@ -15,7 +15,7 @@ namespace ApiTechOil.DataAccess.Repositories
         }
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
-            return await _context.Usuarios.Include(x => x.Id).SingleOrDefaultAsync(x => x.Email == dto.Email && x.Clave == ClaveEncryptHelper.EncryptClave(dto.Clave, dto.Email));
+            return await _context.Usuarios.Include(x => x.Roles).SingleOrDefaultAsync(x => x.Email == dto.Email && x.Clave == ClaveEncryptHelper.EncryptClave(dto.Clave, dto.Email));
         }
         public override async Task<bool> Update(Usuario updateUsuario)
         {
@@ -25,6 +25,7 @@ namespace ApiTechOil.DataAccess.Repositories
             usuario.Email = updateUsuario.Email;
             usuario.Clave = updateUsuario.Clave;
             usuario.Activo = updateUsuario.Activo;
+            usuario.CodRol = updateUsuario.CodRol;
 
             _context.Usuarios.Update(usuario);
             return true;

@@ -2,7 +2,7 @@
 
 namespace ApiTechOil.DataAccess.Repositories.Interfaces
 {
-    public interface IServiciosRepository : IRepository<Servicios>
+    public interface IProyectoRepository : IRepository<Proyecto>
     {
     }
 }
