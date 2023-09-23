@@ -25,6 +25,7 @@ namespace ApiTechOil.DataAccess.Repositories
             usuario.Email = updateUsuario.Email;
             usuario.Clave = updateUsuario.Clave;
             usuario.Activo = updateUsuario.Activo;
+            usuario.CodRol = updateUsuario.CodRol;
 
             _context.Usuarios.Update(usuario);
             return true;
