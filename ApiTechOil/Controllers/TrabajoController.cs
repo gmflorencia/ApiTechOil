@@ -107,7 +107,9 @@ namespace ApiTechOil.Controllers
             var result = await _unitOfWork.TrabajoRepository.Update(new Trabajo
             {
                 CodTrabajo = codTrabajo,
-                Fecha = trabajos.Fecha,
+                CodProyecto = trabajos.CodProyecto,
+                CodServicio = trabajos.CodServicio,
+                Fecha = DateTime.Now,
                 CantHoras=trabajos.CantHoras,
                 ValorHora = trabajos.ValorHora,
                 Costo=trabajos.Costo,
