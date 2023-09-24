@@ -70,6 +70,10 @@ namespace ApiTechOil.Controllers
         [Route("Rergister")]
         public async Task<IActionResult> Register(UsuarioDto dto)
         {
+            var usuario = await _unitOfWork.UsuarioRepository.GetByEmail(dto.Email);
+            if (usuario)
+                return ResponseFactory.CreateSuccessResponse(409, "El email ya está en uso. Por favor, elija otro email.");
+
             await _unitOfWork.UsuarioRepository.Insert(new Usuario(dto));
             await _unitOfWork.Complete();
             return ResponseFactory.CreateSuccessResponse(201, "Usuario registrado con exito!");
