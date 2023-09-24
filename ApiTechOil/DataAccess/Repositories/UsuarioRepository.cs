@@ -40,5 +40,15 @@ namespace ApiTechOil.DataAccess.Repositories
 
             return true;
         }
+        public override async Task<bool> GetByEmail(string email)
+        {
+            var usuario = await _context.Usuarios.Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (usuario != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
