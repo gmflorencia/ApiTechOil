@@ -21,5 +21,11 @@ En este nivel de la arquitectura definiremos todas las entidades de la base de d
 
   ### **Capa Services**
   Se incluirán todos los servicios solicitados por el proyecto, en este caso utilizamos el patron Unit of Work con el objetivo de administrar operaciones con la base de datos.
+
+   ### **Capa Infraestructure**
+   En esta capa se van a gestionar los errores Http para proporcionar una respuesta adecuada.
+   
+
+  
   
 ​
