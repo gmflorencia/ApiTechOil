@@ -49,7 +49,7 @@ namespace ApiTechOil.Controllers
             var trabajo = await _unitOfWork.TrabajoRepository.GetById(codTrabajo);
             if (trabajo == null)
             {
-                return ResponseFactory.CreateSuccessResponse(404, "Trabajo NO encontrado!"); // Devuelve un resultado NotFound si el proyecto no se encuentra.
+                return ResponseFactory.CreateSuccessResponse(404, "Trabajo NO encontrado!"); 
             }
             return ResponseFactory.CreateSuccessResponse(200, trabajo);
         }

@@ -124,13 +124,13 @@ namespace ApiTechOil.Controllers
             if (servicio == null)
             {
                 return ResponseFactory.CreateSuccessResponse(404, "Servicio NO encontrado!"); 
-            }
-            return ResponseFactory.CreateSuccessResponse(200, servicio);
+            }            
 
             var result = await _unitOfWork.ServicioRepository.Update(new Servicio
             {
                 CodServicio = codServicio,
                 Descr = servicio.Descr,
+                ValorHora = servicio.ValorHora,
                 Estado = false,
             });
             if (!result)
@@ -140,7 +140,7 @@ namespace ApiTechOil.Controllers
             else
             {
                 await _unitOfWork.Complete();
-                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+                return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
             }
         }
     }

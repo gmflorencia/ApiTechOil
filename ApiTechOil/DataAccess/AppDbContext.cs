@@ -15,10 +15,14 @@ namespace ApiTechOil.DataAccess
         public DbSet<Trabajo> Trabajos { get; set; }
         public DbSet<Rol> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
             var seeders = new List<IEntitySeeder>
             {
-                new EntitySeeder()
+                new UsuarioSeeder(),
+                new ProyectoSeeder(),
+                new ServicioSeeder(),
+                new TrabajoSeeder(),
+                new RolSeeder(),
             };
             foreach (var seeder in seeders)
             {
