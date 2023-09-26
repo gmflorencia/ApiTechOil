@@ -1,0 +1,1462 @@
+{
+	"info": {
+		"_postman_id": "40b50b6c-f44a-426a-954c-7522d9a88e90",
+		"name": "ApiTechOil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29805666"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"florencia@gmail.com\",\r\n  \"clave\": \"5678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7201/api/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7201",
+							"path": [
+								"api",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "GetAllUsuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario?page=2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdUsuario",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RegisterUsuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nombre\": \"Dante Giulano\",\r\n  \"dni\": 76894765,\r\n  \"email\": \"giulano@gmail.com\",\r\n  \"clave\": \"4023\",\r\n  \"codRol\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/Rergister",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"Rergister"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutUsuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nombre\": \"Daiana Prince\",\r\n  \"dni\": 33675878,\r\n  \"email\": \"prince@gmail.com\",\r\n  \"clave\": \"1234\",\r\n  \"codRol\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteUsuario",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Servicio",
+					"item": [
+						{
+							"name": "GetAllServicios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio?page=2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdServicio",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "EstadoServiciosActivos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/estado/true",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"estado",
+										"true"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ServiciosInactivos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/estado/false",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"estado",
+										"false"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostServicio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"descr\": \"Logistica especializada\",\r\n  \"estado\": true,\r\n  \"valorHora\": 180\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/Register",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"Register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutServicio",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"descr\": \"Formacion administrativa\",\r\n  \"estado\": true,\r\n  \"valorHora\": 200\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/13",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"13"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteServicio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Proyecto",
+					"item": [
+						{
+							"name": "GetAllProyectos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto?page=2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdProyecto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByEstadoProyecto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/estado/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"estado",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostProyecto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"nombre\": \"Arauco\",\r\n  \"direccion\": \"Gutierrez 234 La Rioja\",\r\n  \"estado\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/Register",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"Register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutProyecto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nombre\": \"Vaca Muerta\",\r\n  \"direccion\": \"Lavalle 178 Lanus\",\r\n  \"estado\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteProyecto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/16",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"16"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Trabajo",
+					"item": [
+						{
+							"name": "GetAllTrabajos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdTrabajo",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostTrabajo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codProyecto\": 4,\r\n  \"codServicio\": 4,\r\n  \"fecha\": \"2023-09-23T03:31:19.373Z\",\r\n  \"cantHoras\": 200,\r\n  \"valorHora\": 180,\r\n  \"costo\": 500000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/Register",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"Register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutTrabajo",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codProyecto\": 4,\r\n  \"codServicio\": 4,\r\n  \"fecha\": \"2023-09-23T03:34:10.486Z\",\r\n  \"cantHoras\": 200,\r\n  \"valorHora\": 180,\r\n  \"costo\": 600\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteTrabajo",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TokenAdmin}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Consultor",
+			"item": [
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "GetAllUsuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdUsuario",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RegisterUsuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nombre\": \"Barbara Gordon\",\r\n  \"dni\": 11917686,\r\n  \"email\": \"barbara@gmail.com\",\r\n  \"clave\": \"1010\",\r\n  \"codRol\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/Rergister",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"Rergister"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutUsuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nombre\": \"Florencia Gonzalez\",\r\n  \"dni\": 37053098,\r\n  \"email\": \"florencia@gmail.com\",\r\n  \"clave\": \"5678\",\r\n  \"codRol\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteUsuario",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Usuario/6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Usuario",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Servicio",
+					"item": [
+						{
+							"name": "GetAllServicios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdServicio",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZXBBcGlTdWJqZWN0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZmxvcmVuY2lhQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2OTgwMzA0MjJ9.kV9ZuIn5lFkCVeL276ACYHYafZqdPsRV-VmZUfIn0us",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "EstadoServiciosActivos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZXBBcGlTdWJqZWN0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZmxvcmVuY2lhQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2OTgwMzA0MjJ9.kV9ZuIn5lFkCVeL276ACYHYafZqdPsRV-VmZUfIn0us",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/estado/true",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"estado",
+										"true"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ServiciosInactivos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZXBBcGlTdWJqZWN0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZmxvcmVuY2lhQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2OTgwMzA0MjJ9.kV9ZuIn5lFkCVeL276ACYHYafZqdPsRV-VmZUfIn0us",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/estado/false",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"estado",
+										"false"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostServicio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"descr\": \"Servicio 004\",\r\n  \"estado\": true,\r\n  \"valorHora\": 180\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/Register",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"Register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutServicio",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"descr\": \"Servicio 001\",\r\n  \"estado\": true,\r\n  \"valorHora\": 180\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteServicio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Servicio/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Servicio",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Proyecto",
+					"item": [
+						{
+							"name": "GetAllProyectos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdProyecto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByEstadoProyecto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/estado/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"estado",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostProyecto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nombre\": \"Proyecto 004\",\r\n  \"direccion\": \"Laprida 262 Lomas de Zamora\",\r\n  \"estado\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/Register",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"Register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutProyecto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Proyecto 005\",\r\n  \"direccion\": \"Laprida 262 Lomas de Zamora\",\r\n  \"estado\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/5",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteProyecto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Proyecto/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Proyecto",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Trabajo",
+					"item": [
+						{
+							"name": "GetAllTrabajos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdTrabajo",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostTrabajo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codProyecto\": 4,\r\n  \"codServicio\": 4,\r\n  \"fecha\": \"2023-09-23T03:31:19.373Z\",\r\n  \"cantHoras\": 200,\r\n  \"valorHora\": 180,\r\n  \"costo\": 500000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/Register",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"Register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutTrabajo",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codProyecto\": 4,\r\n  \"codServicio\": 4,\r\n  \"fecha\": \"2023-09-23T03:34:10.486Z\",\r\n  \"cantHoras\": 200,\r\n  \"valorHora\": 180,\r\n  \"costo\": 600\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteTrabajo",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7201/api/Trabajo/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7201",
+									"path": [
+										"api",
+										"Trabajo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TokenConsultor}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
